@@ -1,0 +1,1928 @@
+Read Config file
+========= CMD is S===========
+*****place_posX:0  , posY:0
+-----------port:20008
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+========= CMD is F===========
+*****place_posX:0  , posY:0
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+out mix vision
+Goalienot map id
+========= CMD is S===========
+*****place_posX:0  , posY:0
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  
+out mix vision
+Goalienot map id
+Goalienot map id
+warnning !!!call get_our_player func,id <0 or id >11  

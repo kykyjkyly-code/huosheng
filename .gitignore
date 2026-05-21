@@ -1,0 +1,40 @@
+# Visual Studio
+.vs/
+*.user
+*.sdf
+*.sln.docstates
+*.suo
+*.up2
+*.old
+
+# 编译产物
+Debug/
+Release/
+x64/
+x86/
+*.exe
+*.dll
+*.ilk
+*.exp
+*.lib
+*.pdb
+*.obj
+*.tlog
+*.lastbuildstate
+*.idb
+*.res
+*.pch
+*.bsc
+*.sbr
+
+# SOM 仿真平台二进制
+bin/
+*.dmp
+
+# VS Code
+.vscode/
+
+# 临时文件
+*.tmp
+*.log
+__pycache__/
