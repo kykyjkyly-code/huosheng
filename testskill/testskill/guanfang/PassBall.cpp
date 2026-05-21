@@ -22,16 +22,7 @@ const float PASS_NOT_READY_BACK_DISTANCE = static_cast<float>(BALL_SIZE / 2 + MA
 const double PASS_KICK_POWER = 127.0;
 
 
-/*==================== 角度处理 ====================*/
-float normalizeAngle(float angle)
-{
-	while (angle > PI) angle -= 2 * PI;
-	while (angle < -PI) angle += 2 * PI;
-	return angle;
-}
-
-
-/*==================== 判断是否可以传球 ====================*/
+/*==================== 官方传球参数 ====================*/
 bool isReadyPass(const point2f& ballPosition, const point2f& passerPosition, const point2f& receiverPosition)
 {
 	// 接球车到球矢量角度
@@ -44,26 +35,6 @@ bool isReadyPass(const point2f& ballPosition, const point2f& passerPosition, con
 	bool canPass = fabs(receiverToBallDirection - ballToPasserDirection) < PASS_READY_ANGLE_THRESHOLD;
 
 	return canPass;
-}
-
-
-/*==================== 寻找接球队员 ====================*/
-int findReceiverRobotId(const WorldModel* model, int robot_id)
-{
-	if (model == NULL) {
-		return -1;
-	}
-
-	for (int i = 0; i < 6; i++)
-	{
-		if (i == robot_id || i == model->get_our_goalie())
-			continue;
-
-		if (model->get_our_exist_id()[i])
-			return i;
-	}
-
-	return -1;
 }
 
 
@@ -80,7 +51,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		return task;
 	}
 
-	int receiverRobotId = findReceiverRobotId(model, robot_id);
+	int receiverRobotId = Maths::findReceiverRobotId(model, robot_id);
 	if (receiverRobotId == -1) {
 		receiverRobotId = robot_id;
 	}
@@ -101,7 +72,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	// 1. ball 到车的距离足够近。
 	// 2. 车头方向和车到球矢量角度之差足够小。
 	bool hasBall = (ballPosition - passerPosition).length() < get_ball_threshold + PASS_GET_BALL_DISTANCE_OFFSET &&
-		fabs(normalizeAngle(passerDirection - (ballPosition - passerPosition).angle())) < PASS_GET_BALL_ANGLE_THRESHOLD;
+		fabs(Maths::normalizeAngle(passerDirection - (ballPosition - passerPosition).angle())) < PASS_GET_BALL_ANGLE_THRESHOLD;
 
 	// 如果 receiverRobotId 和 robot_id 是同一车，则直接射门。
 	if (receiverRobotId == robot_id)

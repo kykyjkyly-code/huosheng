@@ -65,13 +65,6 @@ const double SIM_SHOOT_KICK_POWER = 35.0;
 const int REAL_SHOOT_MAX_WAIT_FRAMES = 90;
 const int SIM_SHOOT_MAX_WAIT_FRAMES = 90;
 
-float normalizeAngle(float angle)
-{
-	while (angle > PI) angle -= 2 * PI;
-	while (angle < -PI) angle += 2 * PI;
-	return angle;
-}
-
 bool isget(const WorldModel* model, int robot_id)
 {
 	if (model == NULL) {
@@ -92,20 +85,13 @@ bool isget(const WorldModel* model, int robot_id)
 	const point2f player_to_ball = ball_pos - player_pos;
 	const float ball_dist = player_to_ball.length();
 	const float ball_dir = player_to_ball.angle();
-	const float dir_error = static_cast<float>(fabs(normalizeAngle(ball_dir - my_dir)));
+	const float dir_error = static_cast<float>(fabs(Maths::normalizeAngle(ball_dir - my_dir)));
 
 	// 同时满足“距离近”和“球在车头前方”，才认为已经控到球。
 	const bool ball_near = ball_dist < get_ball_threshold;
 	const bool ball_in_front = dir_error < mouth_angle_threshold;
 
 	return ball_near && ball_in_front;
-}
-
-float clampFloat(float value, float min_value, float max_value)
-{
-	if (value < min_value) return min_value;
-	if (value > max_value) return max_value;
-	return value;
 }
 
 bool findOpponentGoalie(const WorldModel* model, const point2f& opp_goal, point2f& goalie_pos)
@@ -237,7 +223,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	else if (has_goalie) {
 		// 还不能射时，先瞄准守门员所在位置的反方向，准备等空档。
 		float opposite_y = goalie_y > 0.0f ? goal_low_y : goal_high_y;
-		shoot_target.y = clampFloat(opposite_y, goal_low_y, goal_high_y);
+		shoot_target.y = Maths::clip(opposite_y, goal_low_y, goal_high_y);
 	}
 
 	const float face_dir = (shoot_target - ball_pos).angle();

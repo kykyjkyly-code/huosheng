@@ -37,22 +37,6 @@ const double REAL_PASS_KICK_POWER = 25.0;
 const double SIM_PASS_KICK_POWER = 25.0;
 
 
-/*==================== 功能块 0：角度处理 ====================*/
-/*
-将角度限制在 [-PI, PI] 范围内。
-
-原因：
-角度是一个圆，比如 3.13 和 -3.13 实际上几乎是同一个方向。
-如果直接相减，会误判成差了很多。
-*/
-float normalizeAngle(float angle)
-{
-	while (angle > PI) angle -= 2 * PI;
-	while (angle < -PI) angle += 2 * PI;
-	return angle;
-}
-
-
 /*==================== 功能块 1：判断是否控到球，并判断接球队员朝向 ====================*/
 /*
 这个函数现在判断两件事：
@@ -106,8 +90,8 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 	const float ball_dir = player_to_ball.angle();
 
 	// 车头方向和球方向的角度差
-	// 这里必须使用 normalizeAngle，防止 PI 和 -PI 边界误判
-	const float dir_error = fabs(normalizeAngle(ball_dir - my_dir));
+	// 这里必须使用 Maths::normalizeAngle，防止 PI 和 -PI 边界误判
+	const float dir_error = fabs(Maths::normalizeAngle(ball_dir - my_dir));
 
 	// 角度阈值：球必须在车头前方
 	
@@ -129,10 +113,10 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 
 	// pass_dir 是传球方向：球 -> 接球队员
 	// 接球队员接球时应该面对来球，所以方向应该是 pass_dir + PI
-	const float receiver_should_dir = normalizeAngle(pass_dir + PI);
+	const float receiver_should_dir = Maths::normalizeAngle(pass_dir + PI);
 
 	// 接球队员当前朝向和应该朝向之间的误差
-	const float receiver_dir_error = fabs(normalizeAngle(receiver_dir - receiver_should_dir));
+	const float receiver_dir_error = fabs(Maths::normalizeAngle(receiver_dir - receiver_should_dir));
 
 	// 接球队员朝向误差阈值
 	// 0.10 弧度约等于 5.7 度，可以根据实际效果调大或调小

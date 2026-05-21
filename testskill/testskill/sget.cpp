@@ -44,30 +44,6 @@ const float REAL_SGET_RESET_FAR_EXTRA = 25.0f;
 const float SIM_SGET_RESET_FAR_EXTRA = 25.0f;
 
 
-/*==================== 功能块 1：角度工具函数 ====================*/
-/*
-用于把角度限制在 [-PI, PI] 范围内，
-方便后面比较两个方向之间的差值。
-*/
-float normalizeAngle(float angle)
-{
-	while (angle > PI) angle -= 2 * PI;
-	while (angle < -PI) angle += 2 * PI;
-	return angle;
-}
-
-
-/*==================== 功能块 2：角度差计算 ====================*/
-/*
-计算两个角度之间的绝对差值，
-用于判断小车方向是否已经接近目标方向。
-*/
-static float angleDiffAbs(float a, float b)
-{
-	return fabs(normalizeAngle(a - b));
-}
-
-
 /*==================== 功能块 3：拿球状态定义 ====================*/
 /*
 GO_TO_BALL：先靠近球
@@ -167,7 +143,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	// 车绕球时，最终应该站在球的反方向：
 	// 接球队员 ---- 球 ---- 小车
-	float targetRobotRelDir = normalizeAngle(passDir + PI);
+	float targetRobotRelDir = Maths::normalizeAngle(passDir + static_cast<float>(PI));
 
 	// 小车当前相对球的方向：球 -> 小车
 	float currentRobotRelDir = (player_pos - ball_pos).angle();
@@ -267,7 +243,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		task.orientate = (ball_pos - player_pos).angle();
 
 		// 判断当前“球->车”角度和目标“球->车”角度是否接近
-		float err = normalizeAngle(targetRobotRelDir - currentRobotRelDir);
+		float err = Maths::normalizeAngle(targetRobotRelDir - currentRobotRelDir);
 
 		if (fabs(err) < alignAngle)
 		{
@@ -289,7 +265,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		if (fabs(err) < DetAngle)
 			step = err;
 
-		float nextRelDir = normalizeAngle(currentRobotRelDir + step);
+		float nextRelDir = Maths::normalizeAngle(currentRobotRelDir + step);
 
 		// 小车目标点仍在以球为圆心的圆上
 		task.target_pos = ball_pos + Maths::vector2polar(circleR, nextRelDir);
@@ -309,7 +285,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		task.orientate = (goal - ball_pos).angle();
 
 		// 如果角度偏离太多，回到绕球阶段重新校正
-		float err = angleDiffAbs(currentRobotRelDir, targetRobotRelDir);
+		float err = Maths::angleDiff(currentRobotRelDir, targetRobotRelDir);
 
 		if (err > alignAngle * 2.5f)
 		{

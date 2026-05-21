@@ -24,18 +24,6 @@ const float REAL_JIE2CI_BALL_LEAVE_DIST_EXTRA = 8.0f;
 const float SIM_JIE2CI_BALL_LEAVE_DIST_EXTRA = 8.0f;
 
 
-/*==================== 功能块 1：角度处理 ====================*/
-/*
-将角度限制在 [-PI, PI] 范围内，避免方向计算时出现角度跳变。
-*/
-float normalizeAngle(float angle)
-{
-	while (angle > PI) angle -= 2 * PI;
-	while (angle < -PI) angle += 2 * PI;
-	return angle;
-}
-
-
 PlayerTask player_plan(const WorldModel* model, int robot_id)
 {
 	/*==================== 功能块 2：初始化任务 ====================*/

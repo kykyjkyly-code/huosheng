@@ -29,44 +29,7 @@ const float SHOOT_SIDE_OFFSET_Y = 35.0f;
 const double GET_BALL_KICK_POWER = 50.0;
 
 
-/*==================== 角度处理 ====================*/
-float normalizeAngle(float angle)
-{
-	const float twoPi = static_cast<float>(2 * PI);
-	while (angle > PI) angle -= twoPi;
-	while (angle < -PI) angle += twoPi;
-	return angle;
-}
-
-
-/*==================== 判断车头是否朝向对方球门 ====================*/
-bool isTowardOpponentGoal(float direction)
-{
-	return direction < static_cast<float>(PI / 2) && direction > static_cast<float>(-PI / 2);
-}
-
-
-/*==================== 寻找接球队员 ====================*/
-int findReceiverRobotId(const WorldModel* model, int robot_id)
-{
-	if (model == NULL) {
-		return -1;
-	}
-
-	for (int i = 0; i < 6; i++)
-	{
-		if (i == robot_id || i == model->get_our_goalie())
-			continue;
-
-		if (model->get_our_exist_id()[i])
-			return i;
-	}
-
-	return -1;
-}
-
-
-/*==================== DLL 入口 ====================*/
+/*==================== 官方拿球参数 ====================*/
 PlayerTask player_plan(const WorldModel* model, int robot_id)
 {
 	PlayerTask task;
@@ -83,7 +46,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	const float getBallBuffer = isSimulationMode ? SIM_GET_BALL_BUFFER : REAL_GET_BALL_BUFFER;
 	const float offsetX = isSimulationMode ? SIM_OFFSET_X : REAL_OFFSET_X;
 
-	int receiverId = findReceiverRobotId(model, robot_id);
+	int receiverId = Maths::findReceiverRobotId(model, robot_id);
 	if (receiverId == -1) {
 		receiverId = robot_id;
 	}
@@ -105,10 +68,10 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	float distToGoal = (myPos - opponentGoal).length();
 	float ballMoveDist = (ballPos - lastBallPos).length();
 
-	bool isFacingGoal = isTowardOpponentGoal(myDir);
+	bool isFacingGoal = Maths::isTowardOpponentGoal(myDir);
 	bool isBallBehindMe = ballToGoalDist + BALL_SIZE + MAX_ROBOT_SIZE > distToGoal;
 	bool isBallMoving = ballMoveDist >= BALL_STILL_MOVE_DISTANCE;
-	bool isFacingBall = fabs(normalizeAngle((ballPos - myPos).angle() - myDir)) < static_cast<float>(PI / 2 - PI / 12);
+	bool isFacingBall = fabs(Maths::normalizeAngle((ballPos - myPos).angle() - myDir)) < static_cast<float>(PI / 2 - PI / 12);
 
 	float ballMoveAngle = (ballPos - lastBallPos).angle();
 	point2f ballPredicted = ballPos + Maths::vector2polar(ballMoveDist, ballMoveAngle);
@@ -118,7 +81,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		ballPredicted = ballPos;
 	}
 
-	float ballAngleErr = normalizeAngle((ballPos - myPos).angle() - myDir);
+	float ballAngleErr = Maths::normalizeAngle((ballPos - myPos).angle() - myDir);
 	bool isBallBesideMe = distToBall < BALL_SIDE_MOUTH_DISTANCE &&
 		fabs(ballAngleErr) > static_cast<float>(PI / 4) &&
 		fabs(ballAngleErr) < static_cast<float>(PI / 2);
@@ -174,7 +137,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	// 原官方代码这里使用了 angle_diff、dist_to_ball、my_pos，但变量缺失。
 	// 按原意补为：当前车头方向接近任务朝向，并且小车已经靠近球。
-	float angleErr = normalizeAngle(static_cast<float>(task.orientate) - myDir);
+	float angleErr = Maths::normalizeAngle(static_cast<float>(task.orientate) - myDir);
 	if (fabs(angleErr) < 0.01f && distToBall < get_ball_threshold)
 	{
 		task.needKick = true;
@@ -189,7 +152,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	// 判断球是否在小车嘴侧面；如果是，让车后退一点重新拿球。
 	if (isBallBesideMe)
 	{
-		task.target_pos = ballPos + Maths::vector2polar(BALL_SIDE_BACK_DISTANCE, normalizeAngle(myDir + static_cast<float>(PI)));
+		task.target_pos = ballPos + Maths::vector2polar(BALL_SIDE_BACK_DISTANCE, Maths::normalizeAngle(myDir + static_cast<float>(PI)));
 	}
 
 	return task;

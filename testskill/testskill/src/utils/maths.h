@@ -1,9 +1,14 @@
 #ifndef MATHSS_H
 #define MATHSS_H
 #include <math.h>
+#include <cmath>
 #include "constants.h"
 #include "vector.h"
 #include <vector>
+
+// 前向声明，供工具函数使用
+class WorldModel;
+
 enum RoleStyle{
 	KickerS,
 	ReceiveS,
@@ -33,7 +38,7 @@ namespace FieldPoint{
 }
 
 namespace Maths{
-#define SMALL_NUM   0.00000001 // ����������
+#define SMALL_NUM   0.00000001 // ����������
 
 #define EPSINON    0.00001
 
@@ -82,6 +87,47 @@ namespace Maths{
 	point2f across_point(const point2f& p1, const point2f& p2, const point2f& q1, const point2f& q2);
 
 	bool is_inside_penatly(const point2f& p);
+
+	/*==================== 通用工具函数（从各 skill 提取） ====================*/
+
+	/// 将角度规范化到 [-PI, PI] 范围
+	inline float normalizeAngle(float angle)
+	{
+		while (angle > PI) angle -= static_cast<float>(2 * PI);
+		while (angle < -PI) angle += static_cast<float>(2 * PI);
+		return angle;
+	}
+
+	/// 计算两个角度之间的绝对差值（已规范化）
+	inline float angleDiff(float a, float b)
+	{
+		return static_cast<float>(fabs(normalizeAngle(a - b)));
+	}
+
+	/// 判断方向是否朝向对方球门（即朝向正 X 方向）
+	inline bool isTowardOpponentGoal(float direction)
+	{
+		return direction < static_cast<float>(PI / 2) && direction > static_cast<float>(-PI / 2);
+	}
+
+	/// 寻找接球队员：返回非自己、非守门员的第一台存活我方车 ID
+	inline int findReceiverRobotId(const WorldModel* model, int robot_id)
+	{
+		if (model == NULL) {
+			return -1;
+		}
+
+		for (int i = 0; i < 6; i++)
+		{
+			if (i == robot_id || i == model->get_our_goalie())
+				continue;
+
+			if (model->get_our_exist_id()[i])
+				return i;
+		}
+
+		return -1;
+	}
 	
 }
 #endif
