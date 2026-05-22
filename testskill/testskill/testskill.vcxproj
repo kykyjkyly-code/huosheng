@@ -111,6 +111,9 @@
     <ClCompile Include="jie2ci.cpp" />
     <ClCompile Include="ndef.cpp" />
     <ClCompile Include="NormalDef.cpp" />
+    <ClCompile Include="official_passball.cpp" />
+    <ClCompile Include="official_receiveball.cpp" />
+    <ClCompile Include="official_shoot.cpp" />
     <ClCompile Include="shoottiao.cpp" />
     <ClCompile Include="jie.cpp" />
     <ClCompile Include="pass.cpp" />

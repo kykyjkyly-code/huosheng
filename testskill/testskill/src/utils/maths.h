@@ -111,23 +111,5 @@ namespace Maths{
 	}
 
 	/// 寻找接球队员：返回非自己、非守门员的第一台存活我方车 ID
-	inline int findReceiverRobotId(const WorldModel* model, int robot_id)
-	{
-		if (model == NULL) {
-			return -1;
-		}
-
-		for (int i = 0; i < 6; i++)
-		{
-			if (i == robot_id || i == model->get_our_goalie())
-				continue;
-
-			if (model->get_our_exist_id()[i])
-				return i;
-		}
-
-		return -1;
-	}
-	
 }
 #endif

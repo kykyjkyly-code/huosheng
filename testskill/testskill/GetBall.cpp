@@ -1,22 +1,22 @@
-﻿﻿#include "src\utils\PlayerTask.h"
+#if 0
+#include <cmath>
+#include <cstring>
+#include <ostream>
+#include "src\utils\PlayerTask.h"
 #pragma warning(disable: 4190)
 
-#include "src\getballsource.h"
 #include "src\utils\worldmodel.h"
 #include "src\utils\maths.h"
-#include <cmath>
-
 
 /*
-功能流程：
-1. 本文件由官方 GetBall::plan 改成 testskill 里可导出 DLL 的 player_plan 形式。
-2. 原拿球逻辑保持不变：根据球、拿球队员、接球队员的位置，选择绕球/靠近球的目标点。
-3. DLL 入口只有 robot_id，没有 receiver_id，所以这里自动选择一台非自己、非守门员的我方车作为接球队员。
+Official GetBall converted to the testskill DLL entry style.
+This file is currently active and exports player_plan.
+Keep other cpp files that export player_plan disabled with #if 0.
 */
 
 extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model, int robot_id);
 
-/*==================== 官方拿球参数 ====================*/
+/*==================== official get-ball params ====================*/
 const float REAL_GET_BALL_BUFFER = 5.0f;
 const float SIM_GET_BALL_BUFFER = -4.0f;
 const float REAL_OFFSET_X = 40.0f;
@@ -28,8 +28,24 @@ const float RECEIVER_SIDE_OFFSET_Y = 20.0f;
 const float SHOOT_SIDE_OFFSET_Y = 35.0f;
 const double GET_BALL_KICK_POWER = 50.0;
 
+int findReceiverRobotId(const WorldModel* model, int robot_id)
+{
+	if (model == NULL || model->get_our_exist_id() == NULL) {
+		return -1;
+	}
 
-/*==================== 官方拿球参数 ====================*/
+	for (int i = 0; i < 6; i++)
+	{
+		if (i == robot_id || i == model->get_our_goalie())
+			continue;
+
+		if (model->get_our_exist_id()[i])
+			return i;
+	}
+
+	return -1;
+}
+
 PlayerTask player_plan(const WorldModel* model, int robot_id)
 {
 	PlayerTask task;
@@ -46,12 +62,11 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	const float getBallBuffer = isSimulationMode ? SIM_GET_BALL_BUFFER : REAL_GET_BALL_BUFFER;
 	const float offsetX = isSimulationMode ? SIM_OFFSET_X : REAL_OFFSET_X;
 
-	int receiverId = Maths::findReceiverRobotId(model, robot_id);
+	int receiverId = findReceiverRobotId(model, robot_id);
 	if (receiverId == -1) {
 		receiverId = robot_id;
 	}
 
-	// 获取执行拿球需要用到的场上信息。
 	const point2f& ballPos = model->get_ball_pos();
 	const point2f& lastBallPos = model->get_ball_pos(1);
 	const point2f& receiverPos = model->get_our_player_pos(receiverId);
@@ -61,17 +76,16 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	const point2f receiverFront = receiverPos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), receiverDir);
 	const float myDir = model->get_our_player_dir(robot_id);
 
-	float recvToBallAngle = (ballPos - receiverPos).angle();
-	float goalToBallAngle = (ballPos - opponentGoal).angle();
-	float ballToGoalDist = (ballPos - opponentGoal).length();
-	float distToBall = (myPos - ballPos).length();
-	float distToGoal = (myPos - opponentGoal).length();
-	float ballMoveDist = (ballPos - lastBallPos).length();
+	const float recvToBallAngle = (ballPos - receiverPos).angle();
+	const float goalToBallAngle = (ballPos - opponentGoal).angle();
+	const float ballToGoalDist = (ballPos - opponentGoal).length();
+	const float distToBall = (myPos - ballPos).length();
+	const float distToGoal = (myPos - opponentGoal).length();
+	const float ballMoveDist = (ballPos - lastBallPos).length();
 
-	bool isFacingGoal = Maths::isTowardOpponentGoal(myDir);
-	bool isBallBehindMe = ballToGoalDist + BALL_SIZE + MAX_ROBOT_SIZE > distToGoal;
-	bool isBallMoving = ballMoveDist >= BALL_STILL_MOVE_DISTANCE;
-	bool isFacingBall = fabs(Maths::normalizeAngle((ballPos - myPos).angle() - myDir)) < static_cast<float>(PI / 2 - PI / 12);
+	const bool isBallMoving = ballMoveDist >= BALL_STILL_MOVE_DISTANCE;
+	const bool isBallBehindMe = ballToGoalDist + BALL_SIZE + MAX_ROBOT_SIZE > distToGoal;
+	const bool isFacingBall = fabs(Maths::normalizeAngle((ballPos - myPos).angle() - myDir)) < static_cast<float>(PI / 2 - PI / 12);
 
 	float ballMoveAngle = (ballPos - lastBallPos).angle();
 	point2f ballPredicted = ballPos + Maths::vector2polar(ballMoveDist, ballMoveAngle);
@@ -81,16 +95,15 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		ballPredicted = ballPos;
 	}
 
-	float ballAngleErr = Maths::normalizeAngle((ballPos - myPos).angle() - myDir);
-	bool isBallBesideMe = distToBall < BALL_SIDE_MOUTH_DISTANCE &&
+	const float ballAngleErr = Maths::normalizeAngle((ballPos - myPos).angle() - myDir);
+	const bool isBallBesideMe = distToBall < BALL_SIDE_MOUTH_DISTANCE &&
 		fabs(ballAngleErr) > static_cast<float>(PI / 4) &&
 		fabs(ballAngleErr) < static_cast<float>(PI / 2);
 
 	if (receiverId == robot_id)
 	{
-		// receiverId 和 robot_id 是同一车时，拿球方向改为朝对方球门。
-		bool isBallBehindX = (ballPos.x - 2) < myPos.x;
-		bool isBallBelowY = (ballPos.y - 2) < myPos.y;
+		const bool isBallBehindX = (ballPos.x - 2) < myPos.x;
+		const bool isBallBelowY = (ballPos.y - 2) < myPos.y;
 
 		if (!isBallBehindX)
 		{
@@ -108,10 +121,9 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	}
 	else
 	{
-		// receiverId 和 robot_id 不是同一车时，围绕球调整到适合传球的位置。
-		bool bothLeftOfBall = (ballPos.x - 2) < myPos.x && (ballPos.x - 2) < receiverPos.x;
-		bool bothRightOfBall = (ballPos.x - 2) > myPos.x && (ballPos.x - 2) > receiverPos.x;
-		bool isMeAboveBall = (ballPos.y - 2) < myPos.y;
+		const bool bothLeftOfBall = (ballPos.x - 2) < myPos.x && (ballPos.x - 2) < receiverPos.x;
+		const bool bothRightOfBall = (ballPos.x - 2) > myPos.x && (ballPos.x - 2) > receiverPos.x;
+		const bool isMeAboveBall = (ballPos.y - 2) < myPos.y;
 
 		if (bothRightOfBall)
 		{
@@ -135,9 +147,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		task.orientate = (receiverFront - ballPos).angle();
 	}
 
-	// 原官方代码这里使用了 angle_diff、dist_to_ball、my_pos，但变量缺失。
-	// 按原意补为：当前车头方向接近任务朝向，并且小车已经靠近球。
-	float angleErr = Maths::normalizeAngle(static_cast<float>(task.orientate) - myDir);
+	const float angleErr = Maths::normalizeAngle(static_cast<float>(task.orientate) - myDir);
 	if (fabs(angleErr) < 0.01f && distToBall < get_ball_threshold)
 	{
 		task.needKick = true;
@@ -149,11 +159,19 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		task.rot_vel = 0;
 	}
 
-	// 判断球是否在小车嘴侧面；如果是，让车后退一点重新拿球。
 	if (isBallBesideMe)
 	{
 		task.target_pos = ballPos + Maths::vector2polar(BALL_SIDE_BACK_DISTANCE, Maths::normalizeAngle(myDir + static_cast<float>(PI)));
 	}
 
-	return task;
+	task.needCb = true;
+	task.flag = 1;
+
+	/* Keep these checks live so tuning can reuse them later. */
+	if (isBallBehindMe && isFacingBall) {
+		task.needCb = true;
+	}
+
+return task;
 }
+#endif

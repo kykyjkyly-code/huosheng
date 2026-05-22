@@ -101,6 +101,15 @@
     <ClCompile Include="NormalDef.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="official_passball.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="official_receiveball.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="official_shoot.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="shoumen.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
