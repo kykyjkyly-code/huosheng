@@ -1,4 +1,4 @@
-﻿#if 0
+﻿//#if 0
 #include "src\utils\PlayerTask.h"
 #include "src\getballsource.h"
 #include "src\utils\worldmodel.h"
@@ -18,6 +18,11 @@ extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model,
 // 没有队友时，站在球后方的额外距离。
 const float REAL_PGET_NO_RECEIVER_BACK_EXTRA = 5.0f;
 const float SIM_PGET_NO_RECEIVER_BACK_EXTRA = 5.0f;
+// 固定目标点，沿用 jie.cpp 的接球点。
+const float REAL_PGET_TARGET_POS_X = 20.0f;
+const float REAL_PGET_TARGET_POS_Y = 70.0f;
+const float SIM_PGET_TARGET_POS_X = 20.0f;
+const float SIM_PGET_TARGET_POS_Y = 70.0f;
 // 绕球半径在机器人半径基础上额外加的距离。
 const float REAL_PGET_CIRCLE_EXTRA_DIST = 10.0f;
 const float SIM_PGET_CIRCLE_EXTRA_DIST = 10.0f;
@@ -26,7 +31,7 @@ const float REAL_PGET_ARRIVE_CIRCLE_ERR = 4.0f;
 const float SIM_PGET_ARRIVE_CIRCLE_ERR = 4.0f;
 // 每一帧绕球调整的角度步长。
 const float REAL_PGET_ORBIT_STEP_ANGLE = 0.25f;
-const float SIM_PGET_ORBIT_STEP_ANGLE = 0.25f;
+const float SIM_PGET_ORBIT_STEP_ANGLE = 0.30f;
 // 认为已经绕到合适角度的误差阈值。
 const float REAL_PGET_ALIGN_ANGLE = 0.5f;
 const float SIM_PGET_ALIGN_ANGLE = 0.5f;
@@ -82,6 +87,8 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	const bool is_sim = model != NULL && model->get_simulation();
 	const float no_receiver_back_extra = is_sim ? SIM_PGET_NO_RECEIVER_BACK_EXTRA : REAL_PGET_NO_RECEIVER_BACK_EXTRA;
+	const float target_pos_x = is_sim ? SIM_PGET_TARGET_POS_X : REAL_PGET_TARGET_POS_X;
+	const float target_pos_y = is_sim ? SIM_PGET_TARGET_POS_Y : REAL_PGET_TARGET_POS_Y;
 	const float circle_extra_dist = is_sim ? SIM_PGET_CIRCLE_EXTRA_DIST : REAL_PGET_CIRCLE_EXTRA_DIST;
 	const float arrive_circle_err_value = is_sim ? SIM_PGET_ARRIVE_CIRCLE_ERR : REAL_PGET_ARRIVE_CIRCLE_ERR;
 	const float orbit_step_angle = is_sim ? SIM_PGET_ORBIT_STEP_ANGLE : REAL_PGET_ORBIT_STEP_ANGLE;
@@ -132,14 +139,14 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	/*==================== 功能块 8：计算传球方向和绕球目标方向 ====================*/
 	/*
-	根据接球队友位置，计算球到接球队友的方向。
+	根据目标点位置，计算球到目标点的方向。
 	小车最终应该绕到球的反方向，
-	形成“小车 —— 球 —— 接球队友”的位置关系。
+	形成“小车 —— 球 —— 目标点”的位置关系。
 	*/
-	const point2f& receiver_pos = model->get_our_player_pos(receiver_id);
+	const point2f target_point(target_pos_x, target_pos_y);
 
-	// 球 -> 接球队员方向，也就是你要传球/推球的方向
-	float passDir = (receiver_pos - ball_pos).angle();
+	// 球 -> 目标点方向，也就是 kicker 最终要朝向/推球的方向
+	float passDir = (target_point - ball_pos).angle();
 
 	// 车绕球时，最终应该站在球的反方向：
 	// 接球队员 ---- 球 ---- 小车
@@ -166,27 +173,16 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	//在这里修改角度问题
 
 
-
-
-
-
-
-
 	// 每次绕球角度，越小越平滑，越大越快
 	const float alignAngle = align_angle_value;                   // 判断“角度合适”的阈值，约 28度
 	const float closeStartDist = ROBOT_HEAD + BALL_SIZE + 7.0f;   // 比 closeMinDist 大5，给渐进靠近留空间
 
 
-
-
-
-
 	//这里是距离问题
-	const float closeMinDist = ROBOT_HEAD + BALL_SIZE + 2.0f;   // 14.5，吸球嘴碰到球面+缓冲，避免推球
+	const float closeMinDist = ROBOT_HEAD + BALL_SIZE + 5.0f;   // 14.5，吸球嘴碰到球面+缓冲，避免推球
 	const float closeStep = close_step_value;                    // 每帧靠近距离，越小越慢
 
 	task.needCb = true;   // 开吸球/控球
-
 
 	/*==================== 功能块 10：异常距离重置 ====================*/
 	/*
@@ -279,10 +275,10 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		/*
 		小车已经绕到合适方向后，
 		沿着传球方向的反方向逐步靠近球，
-		同时保持车头朝向接球队友方向。
+		同时保持车头朝向目标点方向。
 		*/
-		// 进入靠近阶段后，仍然保持车头指向球到接球的球员
-		task.orientate = (receiver_pos - ball_pos).angle();
+		// 进入靠近阶段后，kicker 朝向球到目标点的方向
+		task.orientate = passDir;
 
 		// 如果角度偏离太多，回到绕球阶段重新校正
 		float err = Maths::angleDiff(currentRobotRelDir, targetRobotRelDir);
@@ -295,7 +291,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		}
 
 		// 目标点在“球和接球队员的直线”上：
-		// receiver_pos ---- ball_pos ---- target_pos
+		// target_point ---- ball_pos ---- target_pos
 		//task.target_pos = ball_pos - Maths::vector2polar(closeDist, passDir);
 
 
@@ -304,9 +300,11 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		point2f closeTarget = ball_pos - Maths::vector2polar(closeDist, passDir);
 		task.target_pos = closeTarget;
 
-		// 渐进减速，靠近球时逐渐降低速度，避免推球
+		// 渐进减速：距终点越近速度越低，到达 closeMinDist 后立即停车
 		float distToFinal = closeDist - closeMinDist;
-		if (distToFinal < 10.0f) {
+		if (distToFinal <= 0.3f || closeDist <= closeMinDist) {
+			task.global_vel = point2f(0, 0);
+		} else if (distToFinal < 10.0f) {
 			float speedRatio = distToFinal / 10.0f;
 			if (speedRatio < 0.0f) speedRatio = 0.0f;
 			float maxSpeed = speedRatio * 200.0f + 5.0f;
@@ -317,9 +315,6 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 				if (moveLen > maxSpeed / 60.0f) {
 					task.global_vel = moveVec * maxSpeed;
 				}
-			}
-			if (distToFinal <= 0.3f) {
-				task.global_vel = point2f(0, 0);
 			}
 		}
 
@@ -371,4 +366,4 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	return task;
 }
-#endif
+//#endif
