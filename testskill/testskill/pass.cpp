@@ -7,7 +7,7 @@
 
 /*
 功能流程：
-1. 本文件负责传球队员拿球、等待接球队员朝向正确，然后执行传球。
+1. 本文件负责传球队员拿球，稳定后执行传球。
 2. 运行时通过 model->get_simulation() 判断当前是仿真还是实地。
 3. 需要调参数时只改下面的 REAL_* 或 SIM_*，player_plan 和 isget 会自动选择对应参数。
 我更改的东西是判断他是否拿到球，两个角度的误差和官方规定的接球嘴中心的距离, 还有一些帧数来判断是否拿稳
@@ -20,9 +20,6 @@ extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model,
 // 球在传球队员车头方向的最大角度误差。（放宽，原来实 0.07 / 仿 0.10）
 const float REAL_PASS_MOUTH_ANGLE_THRESHOLD = 0.14f;
 const float SIM_PASS_MOUTH_ANGLE_THRESHOLD = 0.18f;
-// 接球队员面对来球方向的最大角度误差。（放宽，原来 0.10）
-const float REAL_PASS_RECEIVER_FACE_THRESHOLD = 0.20f;
-const float SIM_PASS_RECEIVER_FACE_THRESHOLD = 0.20f;
 // 拿球距离判定在 get_ball_threshold(15) 基础上额外放宽的距离。
 const float REAL_PASS_GET_BALL_DIST_OFFSET = 5.0f;
 const float SIM_PASS_GET_BALL_DIST_OFFSET = 5.0f;
@@ -37,29 +34,23 @@ const float SIM_PASS_GET_BALL_BACK_DIST = 13.0f;
 // 条件未满足时继续靠近球的距离。
 const float REAL_PASS_APPROACH_BACK_DIST = 4.0f;
 const float SIM_PASS_APPROACH_BACK_DIST = 5.0f;
-// 连续满足控球和接球队员朝向条件多少帧后传球。（放宽，原来实 15 / 仿 20）
+// 连续满足控球条件多少帧后传球。（放宽，原来实 15 / 仿 20）
 const int REAL_PASS_STABLE_FRAME = 8;
-const int SIM_PASS_STABLE_FRAME = 10;
+const int SIM_PASS_STABLE_FRAME = 1;
 // 平射传球力度。
 const double REAL_PASS_KICK_POWER = 25.0;
 const double SIM_PASS_KICK_POWER = 25.0;
 
 
-/*==================== 功能块 1：判断是否控到球，并判断接球队员朝向 ====================*/
+/*==================== 功能块 1：判断传球队员是否控到球 ====================*/
 /*
-这个函数现在判断两件事：
-
-1. 当前传球队员是否控到球：
+只判断传球队员是否控到球：
 - 球离自己足够近
 - 球在自己车头方向
 
-2. 接球队员是否朝向正确：
-- 接球队员应该面对来球方向
-- 也就是传球方向 pass_dir 的反方向，即 pass_dir + PI
-
-只有两个条件都满足，才返回 true。
+两个条件都满足，才返回 true。
 */
-bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_dir)
+bool isget(const WorldModel* model, int robot_id)
 {
 	if (model == NULL) {
 		return false;
@@ -69,16 +60,9 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 		return false;
 	}
 
-	if (receiver_id < 0 || receiver_id >= 6) {
-		return false;
-	}
-
 	const bool is_sim = model != NULL && model->get_simulation();
 	const float mouth_angle_threshold = is_sim ? SIM_PASS_MOUTH_ANGLE_THRESHOLD : REAL_PASS_MOUTH_ANGLE_THRESHOLD;
-	const float receiver_face_threshold = is_sim ? SIM_PASS_RECEIVER_FACE_THRESHOLD : REAL_PASS_RECEIVER_FACE_THRESHOLD;
 	const float get_ball_dist_offset = is_sim ? SIM_PASS_GET_BALL_DIST_OFFSET : REAL_PASS_GET_BALL_DIST_OFFSET;
-
-	/*==================== 1. 判断传球队员是否控到球 ====================*/
 
 	// 获取传球队员坐标
 	const point2f& player_pos = model->get_our_player_pos(robot_id);
@@ -99,45 +83,16 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 	const float ball_dir = player_to_ball.angle();
 
 	// 车头方向和球方向的角度差
-	// 这里必须使用 Maths::normalizeAngle，防止 PI 和 -PI 边界误判
 	const float dir_error = fabs(Maths::normalizeAngle(ball_dir - my_dir));
 
-	// 角度阈值：球必须在车头前方
-	
-
-	// 判断球是否离小车足够近（在 get_ball_threshold + offset 范围内就算拿到）
+	// 判断球是否离小车足够近
 	const bool ball_near = ball_dist < get_ball_threshold + get_ball_dist_offset+100.0f;
 
 	// 判断球是否在小车车头方向
 	const bool ball_in_front = dir_error < mouth_angle_threshold;
 
 	// 传球队员是否已经控到球
-	const bool kicker_get_ball = ball_near && ball_in_front;
-
-
-	/*==================== 2. 判断接球队员朝向是否正确 ====================*/
-
-	// 获取接球队员当前朝向
-	const float receiver_dir = model->get_our_player_dir(receiver_id);
-
-	// pass_dir 是传球方向：球 -> 固定目标点
-	// 接球队员接球时应该面对来球，所以方向应该是 pass_dir + PI
-	const float receiver_should_dir = Maths::normalizeAngle(pass_dir + PI);
-
-	// 接球队员当前朝向和应该朝向之间的误差
-	const float receiver_dir_error = fabs(Maths::normalizeAngle(receiver_dir - receiver_should_dir));
-
-	// 接球队员朝向误差阈值
-	// 0.10 弧度约等于 5.7 度，可以根据实际效果调大或调小
-	
-
-	// 接球队员朝向是否准备好
-	const bool receiver_face_ready = receiver_dir_error < receiver_face_threshold;
-
-
-	/*==================== 3. 两个条件都满足，才认为可以传球 ====================*/
-
-	return kicker_get_ball && receiver_face_ready;
+	return ball_near && ball_in_front;
 }
 
 
@@ -239,13 +194,11 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	/*==================== 功能块 8：控球稳定后再传球 ====================*/
 
 	// 这个 static 计数器要放在 player_plan 函数里面，但不能放进 if 里面
-	// 作用：记录每台车连续满足“控球 + 接球队员朝向正确”的帧数
+	// 作用：记录每台车连续满足"控球"条件的帧数
 	static int hold_cnt[6] = { 0 };
 
-	// 当前这一帧是否满足：
-	// 1. 传球队员控到球
-	// 2. 接球队员朝向已经对准来球方向
-	bool get_ball = isget(model, robot_id, receiver_id, face_dir);
+	// 当前这一帧是否满足：传球队员控到球
+	bool get_ball = isget(model, robot_id);
 
 	// 如果这一帧满足条件，计数 +1
 	// 如果这一帧不满足条件，计数清零
@@ -266,7 +219,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	bool stable_get_ball = hold_cnt[robot_id] >= stable_frame;
 
 
-	/*==================== 情况 1：已经稳定控球，并且接球队员朝向正确，允许传球 ====================*/
+	/*==================== 情况 1：已经稳定控球，允许传球 ====================*/
 	if (stable_get_ball)
 	{
 		// 稳定控球后停在当前位置，不要继续往球上顶
@@ -292,11 +245,10 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	}
 
 
-	/*==================== 情况 2：条件刚满足，但还没稳定，不踢 ====================*/
+	/*==================== 情况 2：刚控到球，但还没稳定，先不踢 ====================*/
 	else if (get_ball)
 	{
-		// 球已经在嘴边，并且接球队员朝向也对了
-		// 但还没有连续稳定 enough 帧
+		// 球已经在嘴边，但还没有连续稳定 enough 帧
 		// 所以先不踢，继续吸住等待
 
 		task.target_pos = player_pos;
@@ -312,11 +264,10 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	}
 
 
-	/*==================== 情况 3：未满足条件，继续拿球或等待接球队员对准 ====================*/
+	/*==================== 情况 3：还没控到球，继续拿球 ====================*/
 	else
 	{
-		// 如果还没有控到球，或者接球队员朝向还没对准
-		// 就继续去球后方拿球，并保持朝向接球队员
+		// 如果还没有控到球，就继续去球后方拿球
 
 		task.orientate = face_dir;
 
