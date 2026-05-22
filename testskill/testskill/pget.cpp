@@ -174,7 +174,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	// 每次绕球角度，越小越平滑，越大越快
 	const float alignAngle = align_angle_value;                   // 判断“角度合适”的阈值，约 28度
-	const float closeStartDist = close_start_extra + MAX_ROBOT_SIZE;
+	const float closeStartDist = ROBOT_HEAD + BALL_SIZE + 7.0f;   // 比 closeMinDist 大5，给渐进靠近留空间
 
 
 
@@ -182,7 +182,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 
 	//这里是距离问题
-	const float closeMinDist = MAX_ROBOT_SIZE;
+	const float closeMinDist = ROBOT_HEAD + BALL_SIZE + 2.0f;   // 14.5，吸球嘴碰到球面+缓冲，避免推球
 	const float closeStep = close_step_value;                    // 每帧靠近距离，越小越慢
 
 	task.needCb = true;   // 开吸球/控球
@@ -303,6 +303,25 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 		point2f closeTarget = ball_pos - Maths::vector2polar(closeDist, passDir);
 		task.target_pos = closeTarget;
+
+		// 渐进减速，靠近球时逐渐降低速度，避免推球
+		float distToFinal = closeDist - closeMinDist;
+		if (distToFinal < 10.0f) {
+			float speedRatio = distToFinal / 10.0f;
+			if (speedRatio < 0.0f) speedRatio = 0.0f;
+			float maxSpeed = speedRatio * 200.0f + 5.0f;
+			point2f moveVec = closeTarget - player_pos;
+			float moveLen = moveVec.length();
+			if (moveLen > 0.01f) {
+				moveVec = moveVec / moveLen;
+				if (moveLen > maxSpeed / 60.0f) {
+					task.global_vel = moveVec * maxSpeed;
+				}
+			}
+			if (distToFinal <= 0.3f) {
+				task.global_vel = point2f(0, 0);
+			}
+		}
 
 
 
