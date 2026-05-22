@@ -17,21 +17,29 @@
 extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model, int robot_id);
 
 /*==================== 传球调参区 ====================*/
-// 球在传球队员车头方向的最大角度误差。
-const float REAL_PASS_MOUTH_ANGLE_THRESHOLD = 0.07f;
-const float SIM_PASS_MOUTH_ANGLE_THRESHOLD = 0.10f;
-// 接球队员面对来球方向的最大角度误差。
-const float REAL_PASS_RECEIVER_FACE_THRESHOLD = 0.10f;
-const float SIM_PASS_RECEIVER_FACE_THRESHOLD = 0.10f;
+// 球在传球队员车头方向的最大角度误差。（放宽，原来实 0.07 / 仿 0.10）
+const float REAL_PASS_MOUTH_ANGLE_THRESHOLD = 0.14f;
+const float SIM_PASS_MOUTH_ANGLE_THRESHOLD = 0.18f;
+// 接球队员面对来球方向的最大角度误差。（放宽，原来 0.10）
+const float REAL_PASS_RECEIVER_FACE_THRESHOLD = 0.20f;
+const float SIM_PASS_RECEIVER_FACE_THRESHOLD = 0.20f;
+// 拿球距离判定在 get_ball_threshold(15) 基础上额外放宽的距离。
+const float REAL_PASS_GET_BALL_DIST_OFFSET = 5.0f;
+const float SIM_PASS_GET_BALL_DIST_OFFSET = 5.0f;
+// 固定传球目标点，和 jie.cpp 的接球点保持一致。
+const float REAL_PASS_TARGET_POS_X = 20.0f;
+const float REAL_PASS_TARGET_POS_Y = 70.0f;
+const float SIM_PASS_TARGET_POS_X = 20.0f;
+const float SIM_PASS_TARGET_POS_Y = 70.0f;
 // 默认拿球时站在球后方的距离。
 const float REAL_PASS_GET_BALL_BACK_DIST = 13.0f;
 const float SIM_PASS_GET_BALL_BACK_DIST = 13.0f;
 // 条件未满足时继续靠近球的距离。
 const float REAL_PASS_APPROACH_BACK_DIST = 4.0f;
 const float SIM_PASS_APPROACH_BACK_DIST = 5.0f;
-// 连续满足控球和接球队员朝向条件多少帧后传球。
-const int REAL_PASS_STABLE_FRAME = 15;
-const int SIM_PASS_STABLE_FRAME = 20;
+// 连续满足控球和接球队员朝向条件多少帧后传球。（放宽，原来实 15 / 仿 20）
+const int REAL_PASS_STABLE_FRAME = 8;
+const int SIM_PASS_STABLE_FRAME = 10;
 // 平射传球力度。
 const double REAL_PASS_KICK_POWER = 25.0;
 const double SIM_PASS_KICK_POWER = 25.0;
@@ -68,6 +76,7 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 	const bool is_sim = model != NULL && model->get_simulation();
 	const float mouth_angle_threshold = is_sim ? SIM_PASS_MOUTH_ANGLE_THRESHOLD : REAL_PASS_MOUTH_ANGLE_THRESHOLD;
 	const float receiver_face_threshold = is_sim ? SIM_PASS_RECEIVER_FACE_THRESHOLD : REAL_PASS_RECEIVER_FACE_THRESHOLD;
+	const float get_ball_dist_offset = is_sim ? SIM_PASS_GET_BALL_DIST_OFFSET : REAL_PASS_GET_BALL_DIST_OFFSET;
 
 	/*==================== 1. 判断传球队员是否控到球 ====================*/
 
@@ -96,8 +105,8 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 	// 角度阈值：球必须在车头前方
 	
 
-	// 判断球是否离小车足够近
-	const bool ball_near = ball_dist < get_ball_threshold;
+	// 判断球是否离小车足够近（在 get_ball_threshold + offset 范围内就算拿到）
+	const bool ball_near = ball_dist < get_ball_threshold + get_ball_dist_offset;
 
 	// 判断球是否在小车车头方向
 	const bool ball_in_front = dir_error < mouth_angle_threshold;
@@ -111,7 +120,7 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 	// 获取接球队员当前朝向
 	const float receiver_dir = model->get_our_player_dir(receiver_id);
 
-	// pass_dir 是传球方向：球 -> 接球队员
+	// pass_dir 是传球方向：球 -> 固定目标点
 	// 接球队员接球时应该面对来球，所以方向应该是 pass_dir + PI
 	const float receiver_should_dir = Maths::normalizeAngle(pass_dir + PI);
 
@@ -151,6 +160,8 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	}
 
 	const bool is_sim = model != NULL && model->get_simulation();
+	const float target_pos_x = is_sim ? SIM_PASS_TARGET_POS_X : REAL_PASS_TARGET_POS_X;
+	const float target_pos_y = is_sim ? SIM_PASS_TARGET_POS_Y : REAL_PASS_TARGET_POS_Y;
 	const float get_ball_back_dist = is_sim ? SIM_PASS_GET_BALL_BACK_DIST : REAL_PASS_GET_BALL_BACK_DIST;
 	const float approach_back_dist = is_sim ? SIM_PASS_APPROACH_BACK_DIST : REAL_PASS_APPROACH_BACK_DIST;
 	const int stable_frame = is_sim ? SIM_PASS_STABLE_FRAME : REAL_PASS_STABLE_FRAME;
@@ -192,28 +203,28 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	/*==================== 功能块 5：获取场上关键信息 ====================*/
 	/*
-	获取当前小车、球、接球队员的位置。
+	获取当前小车、球、固定目标点的位置。
 	后面用这些位置计算拿球点和传球方向。
 	*/
 	const point2f& player_pos = model->get_our_player_pos(robot_id);
 
 	const point2f& ball_pos = model->get_ball_pos();
 
-	const point2f& receiver_pos = model->get_our_player_pos(receiver_id);
+	const point2f target_point(target_pos_x, target_pos_y);
 
 
 	/*==================== 功能块 6：计算传球方向 ====================*/
 	/*
-	传球方向为：球指向接球队员。
+	传球方向为：球指向固定目标点。
 	小车拿球时也保持这个方向，方便拿到球后直接传球。
 	*/
-	float face_dir = (receiver_pos - ball_pos).angle();
+	float face_dir = (target_point - ball_pos).angle();
 
 
 	/*==================== 功能块 7：设置默认拿球任务 ====================*/
 	/*
 	默认动作：
-	小车移动到球后方，车头朝向接球队员，打开吸球。
+	小车移动到球后方，车头朝向固定目标点，打开吸球。
 	此时还不踢球。
 	*/
 	task.orientate = face_dir;
