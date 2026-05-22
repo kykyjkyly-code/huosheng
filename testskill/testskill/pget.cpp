@@ -1,4 +1,4 @@
-﻿//#if 0
+﻿#if 0
 #include "src\utils\PlayerTask.h"
 #include "src\getballsource.h"
 #include "src\utils\worldmodel.h"
@@ -366,4 +366,4 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	return task;
 }
-//#endif
+#endif

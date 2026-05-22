@@ -1,4 +1,4 @@
-﻿#if 0
+﻿//#if 0
 #include"src\utils\PlayerTask.h"
 #include"src\getballsource.h"
 #include"src\utils\worldmodel.h"
@@ -106,7 +106,7 @@ bool isget(const WorldModel* model, int robot_id, int receiver_id, float pass_di
 	
 
 	// 判断球是否离小车足够近（在 get_ball_threshold + offset 范围内就算拿到）
-	const bool ball_near = ball_dist < get_ball_threshold + get_ball_dist_offset;
+	const bool ball_near = ball_dist < get_ball_threshold + get_ball_dist_offset+100.0f;
 
 	// 判断球是否在小车车头方向
 	const bool ball_in_front = dir_error < mouth_angle_threshold;
@@ -337,4 +337,4 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	*/
 	return task;
 }
-#endif
+//#endif

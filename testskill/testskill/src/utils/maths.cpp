@@ -1,8 +1,9 @@
+
 /*
-¹¦ÄÜÁ÷³Ì£º
-1. ±¾ÎÄ¼þÌá¹©ÊýÑ§¹¤¾ßºÍ³¡µØ¹Ø¼üµã¶¨Òå£¬²»Ö±½ÓÖ´ÐÐ»úÆ÷ÈË²ßÂÔ¡£
-2. ÕâÀïÃ»ÓÐ WorldModel£¬Òò´Ë²»ÔÚ±¾ÎÄ¼þÅÐ¶Ï·ÂÕæ»òÊµµØ¡£
-3. Èç¹ûÒÔºó¼ÓÈëÐèÒªµ÷²ÎµÄÊýÑ§Âß¼­£¬ÇëÔÚµ÷ÓÃ·½¸ù¾Ý model->get_simulation() Ñ¡Ôñ²ÎÊýºóÔÙ´«Èë¡£
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½
+1. ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½á¹©ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ßºÍ³ï¿½ï¿½Ø¹Ø¼ï¿½ï¿½ã¶¨ï¿½å£¬ï¿½ï¿½Ö±ï¿½ï¿½Ö´ï¿½Ð»ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½Ô¡ï¿½
+2. ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ WorldModelï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½Ú±ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½Êµï¿½Ø¡ï¿½
+3. ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½Ñ§ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ model->get_simulation() Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù´ï¿½ï¿½ë¡£
 */
 
 #include "maths.h"
@@ -51,7 +52,7 @@ namespace FieldPoint{
 		 point2f spiral_point;
 		 float dist = (pos - spiral_center).length();
 		 float angle = (pos - spiral_center).angle();
-		 float dist_step = 8.0f;           //ÒÀ¾ÝÐý×ª180£¬5´ÎÐý×ª³É¹¦£¬¶ÔÓ¦dist_step Îª40/5-- fuck Ö´ÐÐºÍË¼Â·ÓÐµãÆ«²î ÏÈ²»¹Ü
+		 float dist_step = 8.0f;           //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª180ï¿½ï¿½5ï¿½ï¿½ï¿½ï¿½×ªï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦dist_step Îª40/5-- fuck Ö´ï¿½Ðºï¿½Ë¼Â·ï¿½Ðµï¿½Æ«ï¿½ï¿½ ï¿½È²ï¿½ï¿½ï¿½
 		 float ang_step = static_cast<float>(PI / 180 * 36);
 		 float ang_deta = Maths::normalize(angle - ang_step);
 		 float dist_deta = dist - dist_step;
@@ -77,7 +78,7 @@ namespace FieldPoint{
 			  y_mean += points[i].y;
 		  }
 		  x_mean /= points.size();
-		  y_mean /= points.size(); //ÖÁ´Ë£¬¼ÆËã³öÁË x y µÄ¾ùÖµ
+		  y_mean /= points.size(); //ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ x y ï¿½Ä¾ï¿½Öµ
 
 		  
 		  for (std::vector<point2f>::size_type i = 0; i < points.size(); i++)
