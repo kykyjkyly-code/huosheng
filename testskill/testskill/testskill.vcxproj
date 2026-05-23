@@ -108,6 +108,7 @@
   <ItemGroup>
     <ClCompile Include="GetBall.cpp" />
     <ClCompile Include="goalie_position_switch.cpp" />
+    <ClCompile Include="guanpass.cpp" />
     <ClCompile Include="jie2ci.cpp" />
     <ClCompile Include="ndef.cpp" />
     <ClCompile Include="NormalDef.cpp" />

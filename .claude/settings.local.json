@@ -6,7 +6,10 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(xxd)",
-      "Bash(gh pr *)"
+      "Bash(gh pr *)",
+      "Bash(xxd -l 200 \"D:/huosheng/testskill/testskill/sgetfix.cpp\")",
+      "Read(//c/Program Files/**)",
+      "Bash(where python *)"
     ]
   }
 }

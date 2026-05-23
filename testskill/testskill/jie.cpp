@@ -16,8 +16,8 @@ extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model,
 /*==================== 接球调参区 ====================*/
 // 固定接球点。
 const float REAL_JIE_RECEIVE_POS_X = 100.0f;
-const float REAL_JIE_RECEIVE_POS_Y = 70.0f;
-const float SIM_JIE_RECEIVE_POS_X = 20.0f;
+const float REAL_JIE_RECEIVE_POS_Y = 130.0f;
+const float SIM_JIE_RECEIVE_POS_X = 100.0f;
 const float SIM_JIE_RECEIVE_POS_Y = 130.0f;
 // 球离开发球车超过这个距离后，认为球已经传出来。
 const float REAL_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
