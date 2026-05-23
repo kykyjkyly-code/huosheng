@@ -22,7 +22,7 @@ const float SIM_PASS_BEHIND_BALL_DIST = 13.0f;
 const float REAL_PASS_BEHIND_BALL_NEAR = 5.0f;
 const float SIM_PASS_BEHIND_BALL_NEAR = 6.0f;
 // 控球判断的角度阈值
-const float REAL_PASS_ANGLE_THRESHOLD = 0.25f;
+const float REAL_PASS_ANGLE_THRESHOLD = 0.15f;
 const float SIM_PASS_ANGLE_THRESHOLD = 0.25f;
 // 踢球时车往前顶的微小距离
 const float REAL_PASS_KICK_NUDGE_DIST = 2.0f;

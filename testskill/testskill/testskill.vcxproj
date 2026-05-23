@@ -41,11 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>3pass</TargetName>
+    <TargetName>accpget</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>3pass</TargetName>
+    <TargetName>accpget</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -120,11 +120,13 @@
     <ClCompile Include="jie.cpp" />
     <ClCompile Include="pass.cpp" />
     <ClCompile Include="pget.cpp" />
+    <ClCompile Include="newpget.cpp" />
     <ClCompile Include="sget.cpp" />
     <ClCompile Include="shoumen.cpp" />
     <ClCompile Include="src\utils\maths.cpp" />
     <ClCompile Include="shootping.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="源.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

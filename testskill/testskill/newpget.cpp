@@ -1,4 +1,4 @@
-﻿#if 0
+#if 0
 #include "src\utils\PlayerTask.h"
 #include "src\getballsource.h"
 #include "src\utils\worldmodel.h"
@@ -24,7 +24,7 @@ const float REAL_PGET_TARGET_POS_Y = 130.0f;
 const float SIM_PGET_TARGET_POS_X = 100.0f;
 const float SIM_PGET_TARGET_POS_Y = 130.0f;
 // 绕球半径在机器人半径基础上额外加的距离。
-const float REAL_PGET_CIRCLE_EXTRA_DIST = 10.0f;
+const float REAL_PGET_CIRCLE_EXTRA_DIST = 7.0f;
 const float SIM_PGET_CIRCLE_EXTRA_DIST = 10.0f;
 // 到达绕球圆周附近的容差。
 const float REAL_PGET_ARRIVE_CIRCLE_ERR = 1.0f;
@@ -123,17 +123,19 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	/*==================== 功能块 8：计算传球方向和绕球目标方向 ====================*/
 	/*
-	传球方向为：球指向固定目标点。
+	传球方向为：球指向接球队员控球嘴。
 	小车最终应该绕到球的反方向，
-	形成"小车 —— 球 —— 目标点"的位置关系。
+	形成"小车 —— 球 —— 接球队员控球嘴"的位置关系。
 	*/
-	const point2f target_point(target_pos_x, target_pos_y);
+	const point2f& receiverPos = model->get_our_player_pos(receiver_id);
+	const float receiverDir = model->get_our_player_dir(receiver_id);
+	const point2f receiverHeadPos = receiverPos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), receiverDir);
 
-	// 球 -> 目标点方向，也就是 kicker 最终要朝向/推球的方向
-	float passDir = (target_point - ball_pos).angle();
+	// 球 -> 接球队员控球嘴方向，也就是 kicker 最终要朝向/推球的方向
+	float passDir = (receiverHeadPos - ball_pos).angle();
 
 	// 车绕球时，最终应该站在球的反方向：
-	// 目标点 ---- 球 ---- 小车
+	// 接球队员 ---- 球 ---- 小车
 	float targetRobotRelDir = Maths::normalizeAngle(passDir + static_cast<float>(PI));
 
 	// 小车当前相对球的方向：球 -> 小车
