@@ -139,14 +139,16 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	/*==================== 功能块 8：计算传球方向和绕球目标方向 ====================*/
 	/*
-	根据目标点位置，计算球到目标点的方向。
+	传球方向为：球指向接球队员车头（控球嘴位置）。
 	小车最终应该绕到球的反方向，
-	形成“小车 —— 球 —— 目标点”的位置关系。
+	形成“小车 —— 球 —— 接球队员车头”的位置关系。
 	*/
-	const point2f target_point(target_pos_x, target_pos_y);
+	const point2f& receiverPos = model->get_our_player_pos(receiver_id);
+	const float receiverDir = model->get_our_player_dir(receiver_id);
+	const point2f receiverHeadPos = receiverPos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), receiverDir);
 
-	// 球 -> 目标点方向，也就是 kicker 最终要朝向/推球的方向
-	float passDir = (target_point - ball_pos).angle();
+	// 球 -> 接球队员车头方向，也就是 kicker 最终要朝向/推球的方向
+	float passDir = (receiverHeadPos - ball_pos).angle();
 
 	// 车绕球时，最终应该站在球的反方向：
 	// 接球队员 ---- 球 ---- 小车

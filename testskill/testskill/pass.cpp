@@ -1,4 +1,4 @@
-﻿//#if 0
+﻿#if 0
 #include"src\utils\PlayerTask.h"
 #include"src\getballsource.h"
 #include"src\utils\worldmodel.h"
@@ -33,7 +33,7 @@ const float REAL_PASS_GET_BALL_BACK_DIST = 13.0f;
 const float SIM_PASS_GET_BALL_BACK_DIST = 13.0f;
 // 条件未满足时继续靠近球的距离。
 const float REAL_PASS_APPROACH_BACK_DIST = 4.0f;
-const float SIM_PASS_APPROACH_BACK_DIST = 5.0f;
+const float SIM_PASS_APPROACH_BACK_DIST = 15.0f;
 // 连续满足控球条件多少帧后传球。（放宽，原来实 15 / 仿 20）
 const int REAL_PASS_STABLE_FRAME = 8;
 const int SIM_PASS_STABLE_FRAME = 1;
@@ -170,10 +170,13 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	/*==================== 功能块 6：计算传球方向 ====================*/
 	/*
-	传球方向为：球指向固定目标点。
+	传球方向为：球指向接球队员车头（控球嘴位置）。
 	小车拿球时也保持这个方向，方便拿到球后直接传球。
 	*/
-	float face_dir = (target_point - ball_pos).angle();
+	const point2f& receiver_pos = model->get_our_player_pos(receiver_id);
+	const float receiver_dir = model->get_our_player_dir(receiver_id);
+	const point2f receiverHeadPos = receiver_pos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), receiver_dir);
+	float face_dir = (receiverHeadPos - ball_pos).angle();
 
 
 	/*==================== 功能块 7：设置默认拿球任务 ====================*/
@@ -288,4 +291,4 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	*/
 	return task;
 }
-//#endif
+#endif

@@ -71,9 +71,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="goalie_timing_shoot.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="sget.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -120,6 +117,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GetBall.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="goalie_position_switch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
