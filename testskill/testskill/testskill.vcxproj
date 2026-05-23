@@ -115,6 +115,7 @@
     <ClCompile Include="official_passball.cpp" />
     <ClCompile Include="official_receiveball.cpp" />
     <ClCompile Include="official_shoot.cpp" />
+    <ClCompile Include="passfix.cpp" />
     <ClCompile Include="shoottiao.cpp" />
     <ClCompile Include="jie.cpp" />
     <ClCompile Include="pass.cpp" />

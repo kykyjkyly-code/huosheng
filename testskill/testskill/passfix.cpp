@@ -1,7 +1,8 @@
-#include"utils\PlayerTask.h"
-#include"getballsource.h"
-#include"utils\worldmodel.h"
-#include"utils\maths.h"
+#if 1
+#include"src\utils\PlayerTask.h"
+#include"src\getballsource.h"
+#include"src\utils\worldmodel.h"
+#include"src\utils\maths.h"
 #include <cmath>
 
 extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model, int robot_id);
@@ -96,41 +97,26 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	task.isPass = false;
 
 
-	/*==================== 动态控球判断与传球触发 ====================*/
-	static int get_ball_frames = 0;   // 记录连续控住球的帧数
-	const int KICK_DELAY_FRAMES = 2;  // 需要2帧稳定准备才触发传球
+	/*==================== 控球判断与传球触发 ====================*/
+	// 固定角度阈值，控住球即刻触发传球
+	const float angle_threshold = 0.12f;
 
-	// 动态角度阈值：已控球（>0帧）放宽到0.12，还没控球时严格要求0.05保证对准
-	float current_angle_threshold = (get_ball_frames > 0) ? 0.12f : 0.05f;
-
-	if (isget_dynamic(model, robot_id, current_angle_threshold))
+	if (isget_dynamic(model, robot_id, angle_threshold))
 	{
-		get_ball_frames++;
-	}
-	else
-	{
-		// 没控住球时直接清零
-		get_ball_frames = 0;
-	}
-
-
-	/*==================== 状态机逻辑判断 ====================*/
-	if (get_ball_frames >= KICK_DELAY_FRAMES)
-	{
-		// 控球瞬间车往前顶一个微小目标点，小车顺着朝向把球送出去
+		// 控住球了，车往前顶把球送出去
 		task.target_pos = ball_pos + Maths::vector2polar(2, face_dir);
 		task.orientate = face_dir;
 
 		task.needCb = true;
 		task.isChipKick = false;
-		task.needKick = true; 
+		task.needKick = true;
 		task.isPass = true;
 		task.kickPower = 35;
 	}
 	else
 	{
+		// 还没控住球，站在球后方准备
 		task.orientate = face_dir;
-
 		task.target_pos = ball_pos - Maths::vector2polar(5, face_dir);
 
 		task.needCb = true;
@@ -140,3 +126,4 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	return task;
 }
+#endif
