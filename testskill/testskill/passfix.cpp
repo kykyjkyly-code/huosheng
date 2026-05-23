@@ -5,7 +5,31 @@
 #include"src\utils\maths.h"
 #include <cmath>
 
+/*
+功能流程：
+1. 本文件负责传球：当前小车先靠近球后方，控住球后即刻推给接球队友。
+2. 运行时通过 model->get_simulation() 判断当前是仿真还是实地。
+3. 需要调参数时只改下面的 REAL_* 或 SIM_*，player_plan 里会自动选择对应参数。
+*/
+
 extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model, int robot_id);
+
+/*==================== 传球调参区 ====================*/
+// 没控住球时，站在球后方的距离
+const float REAL_PASS_BEHIND_BALL_DIST = 13.0f;
+const float SIM_PASS_BEHIND_BALL_DIST = 13.0f;
+// 没控住球时，站在球后方的近距离
+const float REAL_PASS_BEHIND_BALL_NEAR = 5.0f;
+const float SIM_PASS_BEHIND_BALL_NEAR = 8.0f;
+// 控球判断的角度阈值
+const float REAL_PASS_ANGLE_THRESHOLD = 0.25f;
+const float SIM_PASS_ANGLE_THRESHOLD = 0.25f;
+// 踢球时车往前顶的微小距离
+const float REAL_PASS_KICK_NUDGE_DIST = 2.0f;
+const float SIM_PASS_KICK_NUDGE_DIST = 3.0f;
+// 传球力度
+const float REAL_PASS_KICK_POWER = 35.0f;
+const float SIM_PASS_KICK_POWER = 60.0f;
 
 
 // 修改后的 isget 判断，支持动态调整角度阈值
@@ -50,6 +74,13 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		return task;
 	}
 
+	const bool is_sim = model->get_simulation();
+	const float behind_ball_dist = is_sim ? SIM_PASS_BEHIND_BALL_DIST : REAL_PASS_BEHIND_BALL_DIST;
+	const float behind_ball_near = is_sim ? SIM_PASS_BEHIND_BALL_NEAR : REAL_PASS_BEHIND_BALL_NEAR;
+	const float angle_threshold = is_sim ? SIM_PASS_ANGLE_THRESHOLD : REAL_PASS_ANGLE_THRESHOLD;
+	const float kick_nudge_dist = is_sim ? SIM_PASS_KICK_NUDGE_DIST : REAL_PASS_KICK_NUDGE_DIST;
+	const float kick_power = is_sim ? SIM_PASS_KICK_POWER : REAL_PASS_KICK_POWER;
+
 	// 找一个接球队员
 	int receiver_id = -1;
 
@@ -87,7 +118,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	// 默认：去球的后方，车头朝向接球队员
 	task.orientate = face_dir;
-	task.target_pos = ball_pos - Maths::vector2polar(13, face_dir);
+	task.target_pos = ball_pos - Maths::vector2polar(behind_ball_dist, face_dir);
 
 	// 默认开启吸球
 	task.needCb = true;
@@ -98,26 +129,23 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 
 	/*==================== 控球判断与传球触发 ====================*/
-	// 固定角度阈值，控住球即刻触发传球
-	const float angle_threshold = 0.12f;
-
 	if (isget_dynamic(model, robot_id, angle_threshold))
 	{
 		// 控住球了，车往前顶把球送出去
-		task.target_pos = ball_pos + Maths::vector2polar(2, face_dir);
+		task.target_pos = ball_pos + Maths::vector2polar(kick_nudge_dist, face_dir);
 		task.orientate = face_dir;
 
 		task.needCb = true;
 		task.isChipKick = false;
 		task.needKick = true;
 		task.isPass = true;
-		task.kickPower = 35;
+		task.kickPower = kick_power;
 	}
 	else
 	{
 		// 还没控住球，站在球后方准备
 		task.orientate = face_dir;
-		task.target_pos = ball_pos - Maths::vector2polar(5, face_dir);
+		task.target_pos = ball_pos - Maths::vector2polar(behind_ball_near, face_dir);
 
 		task.needCb = true;
 		task.needKick = false;
