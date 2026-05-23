@@ -20,16 +20,17 @@ const float REAL_PASS_BEHIND_BALL_DIST = 13.0f;
 const float SIM_PASS_BEHIND_BALL_DIST = 13.0f;
 // 没控住球时，站在球后方的近距离
 const float REAL_PASS_BEHIND_BALL_NEAR = 5.0f;
-const float SIM_PASS_BEHIND_BALL_NEAR = 8.0f;
+const float SIM_PASS_BEHIND_BALL_NEAR = 6.0f;
 // 控球判断的角度阈值
 const float REAL_PASS_ANGLE_THRESHOLD = 0.25f;
 const float SIM_PASS_ANGLE_THRESHOLD = 0.25f;
 // 踢球时车往前顶的微小距离
 const float REAL_PASS_KICK_NUDGE_DIST = 2.0f;
 const float SIM_PASS_KICK_NUDGE_DIST = 3.0f;
+
 // 传球力度
-const float REAL_PASS_KICK_POWER = 35.0f;
-const float SIM_PASS_KICK_POWER = 60.0f;
+const float REAL_PASS_KICK_POWER = 30.0f;
+const float SIM_PASS_KICK_POWER = 127.0f;
 
 
 // 修改后的 isget 判断，支持动态调整角度阈值
@@ -53,11 +54,11 @@ bool isget_dynamic(const WorldModel* model, int robot_id, float angle_threshold)
 	// 小车指向球的方向
 	const float ball_dir = player_to_ball.angle();
 
-	// 车头方向与球的方向差
-	const float dir_error = fabs(ball_dir - my_dir);
+	// 车头方向与球的方向差（归一化后再取绝对值）
+	const float dir_error = fabs(Maths::normalizeAngle(ball_dir - my_dir));
 
 	// 判断球是否离小车足够近
-	const bool ball_near = ball_dist < get_ball_threshold;
+	const bool ball_near = ball_dist < get_ball_threshold-1.0f;
 
 	// 使用动态调整的角度阈值，已控球时放宽要求
 	const bool ball_in_front = dir_error < angle_threshold;
@@ -98,9 +99,15 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		}
 	}
 
-	// 如果没找到接球队员，先不处理
+	// 如果没找到接球队员，面向球并停在球后方等待
 	if (receiver_id == -1)
 	{
+		const point2f& ball_pos = model->get_ball_pos();
+		const point2f& player_pos = model->get_our_player_pos(robot_id);
+		float faceBallDir = (ball_pos - player_pos).angle();
+		task.orientate = faceBallDir;
+		task.target_pos = ball_pos - Maths::vector2polar(MAX_ROBOT_SIZE + 10.0f, faceBallDir);
+		task.needCb = true;
 		return task;
 	}
 
@@ -110,11 +117,14 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	// 获取球的位置
 	const point2f& ball_pos = model->get_ball_pos();
 
-	// 获取接球队员的位置
+	// 获取接球队员的位置和方向
 	const point2f& receiver_pos = model->get_our_player_pos(receiver_id);
+	const float receiver_dir = model->get_our_player_dir(receiver_id);
+	// 接球队员控球嘴位置
+	const point2f receiver_head = receiver_pos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), receiver_dir);
 
-	// 方向指向接球队员
-	float face_dir = (receiver_pos - ball_pos).angle();
+	// 方向：球 → 接球队员控球嘴
+	float face_dir = (receiver_head - ball_pos).angle();
 
 	// 默认：去球的后方，车头朝向接球队员
 	task.orientate = face_dir;
