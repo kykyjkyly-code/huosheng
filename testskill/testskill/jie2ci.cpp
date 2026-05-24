@@ -6,22 +6,29 @@
 
 /*
 功能流程：
-1. 本文件负责二次接球，先站到固定接球点，再根据来球方向调整车头。
+1. 本文件负责接球车站到固定接球点，并根据球是否离开发球队员切换等待/迎球状态。
 2. 运行时通过 model->get_simulation() 判断当前是仿真还是实地。
 3. 需要调参数时只改下面的 REAL_* 或 SIM_*，player_plan 里会自动选择对应参数。
 */
 
 extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model, int robot_id);
 
-/*==================== 二次接球调参区 ====================*/
+/*==================== 接球调参区 ====================*/
 // 固定接球点。
-const float REAL_JIE2CI_RECEIVE_POS_X = 140.0f;
-const float REAL_JIE2CI_RECEIVE_POS_Y = -80.0f;
-const float SIM_JIE2CI_RECEIVE_POS_X = 140.0f;
-const float SIM_JIE2CI_RECEIVE_POS_Y = -80.0f;
+const float REAL_JIE_RECEIVE_POS_X = 0.0f;
+const float REAL_JIE_RECEIVE_POS_Y = -50.0f;
+const float SIM_JIE_RECEIVE_POS_X = 0.0f;
+const float SIM_JIE_RECEIVE_POS_Y = -50.0f;
+
+
 // 球离开发球车超过这个距离后，认为球已经传出来。
-const float REAL_JIE2CI_BALL_LEAVE_DIST_EXTRA = 8.0f;
-const float SIM_JIE2CI_BALL_LEAVE_DIST_EXTRA = 8.0f;
+const float REAL_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
+const float SIM_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
+// 接球时车头朝向的参考点：车头朝向 (orient_ref → 球) 的方向
+const float REAL_JIE_ORIENT_REF_X = 0.0f;
+const float REAL_JIE_ORIENT_REF_Y = -50.0f;
+const float SIM_JIE_ORIENT_REF_X = 0.0f;
+const float SIM_JIE_ORIENT_REF_Y = -50.0f;
 
 
 PlayerTask player_plan(const WorldModel* model, int robot_id)
@@ -37,9 +44,11 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	}
 
 	const bool is_sim = model != NULL && model->get_simulation();
-	const float receive_pos_x = is_sim ? SIM_JIE2CI_RECEIVE_POS_X : REAL_JIE2CI_RECEIVE_POS_X;
-	const float receive_pos_y = is_sim ? SIM_JIE2CI_RECEIVE_POS_Y : REAL_JIE2CI_RECEIVE_POS_Y;
-	const float ball_leave_dist_extra = is_sim ? SIM_JIE2CI_BALL_LEAVE_DIST_EXTRA : REAL_JIE2CI_BALL_LEAVE_DIST_EXTRA;
+	const float receive_pos_x = is_sim ? SIM_JIE_RECEIVE_POS_X : REAL_JIE_RECEIVE_POS_X;
+	const float receive_pos_y = is_sim ? SIM_JIE_RECEIVE_POS_Y : REAL_JIE_RECEIVE_POS_Y;
+	const float ball_leave_dist_extra = is_sim ? SIM_JIE_BALL_LEAVE_DIST_EXTRA : REAL_JIE_BALL_LEAVE_DIST_EXTRA;
+	const float orient_ref_x = is_sim ? SIM_JIE_ORIENT_REF_X : REAL_JIE_ORIENT_REF_X;
+	const float orient_ref_y = is_sim ? SIM_JIE_ORIENT_REF_Y : REAL_JIE_ORIENT_REF_Y;
 
 	int receiver_id = -1;
 
@@ -63,13 +72,13 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	const point2f& receiver_pos = model->get_our_player_pos(robot_id);
 	const point2f& ball_pos = model->get_ball_pos();
 	const point2f& ball_vel = model->get_ball_vel();
-
+	
 
 	/*==================== 功能块 4：设置默认任务 ====================*/
 	/*
-	默认目标点为接球点，默认开启吸球，不主动踢球,角度是接球车到球的方向
+	默认目标点为接球点，默认开启吸球，不主动踢球,角度是球→传球车车头的方向
 	*/
-	task.target_pos = receive_pos;//可以要把这个给他改为固定点位
+	task.target_pos = receive_pos;
 
 
 
@@ -77,15 +86,15 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	task.needKick = false;
 	task.isPass = false;
 
-	float face_dir = 0.0f;
-	face_dir = (ball_pos - receiver_pos).angle();
-	task.orientate = face_dir;
-	/*==================== 功能块 5：判断球是否传来 ====================*/
-
-	//根据球离发球球员的距离来判断
-
+	// 车头朝向的固定参考点
 	const point2f& kicker_pos = model->get_our_player_pos(receiver_id);
-
+	const point2f orient_ref(orient_ref_x, orient_ref_y);
+	float face_dir = (ball_pos - orient_ref).angle();
+	task.orientate = face_dir;
+/*==================== 功能块 5：判断球是否传来 ====================*/
+	
+	//根据球离发球球员的距离来判断
+   
 	// 球到踢球球员的距离
 	float ball_to_kicker_dist = (ball_pos - kicker_pos).length();
 
@@ -99,23 +108,8 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	*/
 	if (ball_is_coming)
 	{
-		float ballMoveDir = ball_vel.angle();
-
-		//	point2f task_point = Maths::line_perp_across(
-		//	ball_pos,
-		//	ballMoveDir,
-		//	receive_pos
-		//};
-
-
-
-
-
-		//这个应该要修改
-		//task.target_pos =
-		//	task_point;// + Maths::vector2polar(MAX_ROBOT_SIZE + 3.0f, ballMoveDir);
-		//
-		face_dir = normalizeAngle(ballMoveDir + PI);
+		// 车头朝向：固定参考点 → 球
+		face_dir = (ball_pos - orient_ref).angle();
 	}
 
 
@@ -127,7 +121,8 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	else
 	{
 		task.target_pos = receive_pos;
-		face_dir = (ball_pos - receiver_pos).angle();
+		// 车头朝向：固定参考点 → 球
+		face_dir = (ball_pos - orient_ref).angle();
 	}
 
 

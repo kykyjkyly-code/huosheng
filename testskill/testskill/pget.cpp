@@ -1,4 +1,4 @@
-﻿#if 0
+﻿#if 1
 #include "src\utils\PlayerTask.h"
 #include "src\getballsource.h"
 #include "src\utils\worldmodel.h"
@@ -27,6 +27,7 @@ const float SIM_PGET_TARGET_POS_Y = 130.0f;
 const float REAL_PGET_CIRCLE_EXTRA_DIST = 10.0f;
 const float SIM_PGET_CIRCLE_EXTRA_DIST = 10.0f;
 // 到达绕球圆周附近的容差。
+                // 反向：目标点 → 球 → 小车
 const float REAL_PGET_ARRIVE_CIRCLE_ERR = 1.0f;
 const float SIM_PGET_ARRIVE_CIRCLE_ERR = 1.0f;
 // 每一帧绕球调整的角度步长。
@@ -134,7 +135,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 	// 车绕球时，最终应该站在球的反方向：
 	// 目标点 ---- 球 ---- 小车
-	float targetRobotRelDir = Maths::normalizeAngle(passDir + static_cast<float>(PI));
+	float targetRobotRelDir = passDir;
 
 	// 小车当前相对球的方向：球 -> 小车
 	float currentRobotRelDir = (player_pos - ball_pos).angle();

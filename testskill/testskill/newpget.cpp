@@ -24,8 +24,8 @@ const float REAL_PGET_TARGET_POS_Y = 130.0f;
 const float SIM_PGET_TARGET_POS_X = 100.0f;
 const float SIM_PGET_TARGET_POS_Y = 130.0f;
 // 绕球半径在机器人半径基础上额外加的距离。
-const float REAL_PGET_CIRCLE_EXTRA_DIST = 7.0f;
-const float SIM_PGET_CIRCLE_EXTRA_DIST = 10.0f;
+const float REAL_PGET_CIRCLE_EXTRA_DIST = 3.0f;
+const float SIM_PGET_CIRCLE_EXTRA_DIST = 20.0f;
 // 到达绕球圆周附近的容差。
 const float REAL_PGET_ARRIVE_CIRCLE_ERR = 1.0f;
 const float SIM_PGET_ARRIVE_CIRCLE_ERR = 1.0f;

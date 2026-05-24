@@ -106,6 +106,7 @@
     <ClInclude Include="src\utils\worldmodel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dianjie.cpp" />
     <ClCompile Include="GetBall.cpp" />
     <ClCompile Include="goalie_position_switch.cpp" />
     <ClCompile Include="guanpass.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="src\utils\maths.cpp" />
     <ClCompile Include="shootping.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="twojie.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

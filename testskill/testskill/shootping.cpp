@@ -142,11 +142,31 @@ const point2f& receiver_pos = model->get_our_player_pos(receiver_id);
 point2f goal = -FieldPoint::Goal_Center_Point;
 
 
-//==================== 功能块 6：计算目标方向 ====================
-// 当前代码把方向设置为“球指向敌方球门”的方向。
-// 小车会绕到球后方，并朝向这个方向。
-// 方向改为球门方向
-float face_dir = (goal - ball_pos).angle();
+//==================== 功能块 6：判断球在球门哪一侧，射向另一端 ====================
+// 根据球在场上的 Y 坐标判断球在球门上方还是下方，
+// 射向球门的相反一侧。如果球在原点附近（无球），默认射中间。
+const point2f goal_top(static_cast<float>(FIELD_LENGTH_H), static_cast<float>(GOAL_WIDTH / 2));
+const point2f goal_bottom(static_cast<float>(FIELD_LENGTH_H), static_cast<float>(-GOAL_WIDTH / 2));
+const point2f goal_center(static_cast<float>(FIELD_LENGTH_H), 0.0f);
+
+point2f shoot_target;
+if (ball_pos.length() < 1.0f)
+{
+	// 没有球，默认射球门中间
+	shoot_target = goal_center;
+}
+else if (ball_pos.y > 0)
+{
+	// 球在球门上方 → 射向球门下角
+	shoot_target = goal_bottom;
+}
+else
+{
+	// 球在球门下方 → 射向球门上角
+	shoot_target = goal_top;
+}
+
+float face_dir = (shoot_target - ball_pos).angle();
 
 
 //==================== 功能块 7：设置默认拿球任务 ====================

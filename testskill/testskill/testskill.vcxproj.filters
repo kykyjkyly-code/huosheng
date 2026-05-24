@@ -134,5 +134,11 @@
     <ClCompile Include="源.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="twojie.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dianjie.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

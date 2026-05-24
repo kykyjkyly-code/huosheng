@@ -19,6 +19,8 @@ const float REAL_JIE_RECEIVE_POS_X = 100.0f;
 const float REAL_JIE_RECEIVE_POS_Y = 130.0f;
 const float SIM_JIE_RECEIVE_POS_X = 100.0f;
 const float SIM_JIE_RECEIVE_POS_Y = 130.0f;
+
+
 // 球离开发球车超过这个距离后，认为球已经传出来。
 const float REAL_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
 const float SIM_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
@@ -88,7 +90,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	const point2f& kicker_pos = model->get_our_player_pos(receiver_id);
 	const float kicker_dir = model->get_our_player_dir(receiver_id);
 	const point2f kickerHeadPos = kicker_pos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), kicker_dir);
-	float face_dir = (kickerHeadPos - ball_pos).angle();
+	float face_dir = (ball_pos - kickerHeadPos).angle();
 	task.orientate = face_dir;
 /*==================== 功能块 5：判断球是否传来 ====================*/
 	
@@ -107,9 +109,8 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	*/
 	if (ball_is_coming)
 	{
-		// 车头朝向：从参考点指向球的方向
-		point2f orient_ref(orient_ref_x, orient_ref_y);
-		face_dir = (ball_pos - orient_ref).angle();
+		// 车头朝向：控球嘴 → 球
+		face_dir = (ball_pos - kickerHeadPos).angle();
 	}
 
 
@@ -121,9 +122,8 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	else
 	{
 		task.target_pos = receive_pos;
-		// 车头朝向：从参考点指向球的方向
-		point2f orient_ref(orient_ref_x, orient_ref_y);
-		face_dir = (ball_pos - orient_ref).angle();
+		// 车头朝向：控球嘴 → 球
+		face_dir = (ball_pos - kickerHeadPos).angle();
 	}
 
 
