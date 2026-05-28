@@ -1,4 +1,4 @@
-#if 0
+#if 1
 #include"src\utils\PlayerTask.h"
 #include"src\getballsource.h"
 #include"src\utils\worldmodel.h"
@@ -22,14 +22,14 @@ const float SIM_PASS_BEHIND_BALL_DIST = 13.0f;
 const float REAL_PASS_BEHIND_BALL_NEAR = 5.0f;
 const float SIM_PASS_BEHIND_BALL_NEAR = 6.0f;
 // 控球判断的角度阈值
-const float REAL_PASS_ANGLE_THRESHOLD = 0.15f;
+const float REAL_PASS_ANGLE_THRESHOLD = 0.05f;
 const float SIM_PASS_ANGLE_THRESHOLD = 0.25f;
 // 踢球时车往前顶的微小距离
 const float REAL_PASS_KICK_NUDGE_DIST = 2.0f;
 const float SIM_PASS_KICK_NUDGE_DIST = 3.0f;
 
 // 传球力度
-const float REAL_PASS_KICK_POWER = 30.0f;
+const float REAL_PASS_KICK_POWER = 25.0f;
 const float SIM_PASS_KICK_POWER = 127.0f;
 
 
@@ -146,7 +146,7 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 		task.orientate = face_dir;
 
 		task.needCb = true;
-		task.isChipKick = false;
+		task.isChipKick = true;
 		task.needKick = true;
 		task.isPass = true;
 		task.kickPower = kick_power;

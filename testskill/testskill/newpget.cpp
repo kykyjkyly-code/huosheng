@@ -19,8 +19,8 @@ extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model,
 const float REAL_PGET_NO_RECEIVER_BACK_EXTRA = 5.0f;
 const float SIM_PGET_NO_RECEIVER_BACK_EXTRA = 5.0f;
 // 固定目标点，沿用 jie.cpp 的接球点。
-const float REAL_PGET_TARGET_POS_X = 100.0f;
-const float REAL_PGET_TARGET_POS_Y = 130.0f;
+const float REAL_PGET_TARGET_POS_X = 50.0f;
+const float REAL_PGET_TARGET_POS_Y = -100.0f;
 const float SIM_PGET_TARGET_POS_X = 100.0f;
 const float SIM_PGET_TARGET_POS_Y = 130.0f;
 // 绕球半径在机器人半径基础上额外加的距离。

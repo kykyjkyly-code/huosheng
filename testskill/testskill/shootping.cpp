@@ -16,7 +16,7 @@ extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model,
 
 /*==================== 平射调参区 ====================*/
 // 球在车头方向的最大角度误差，单位是弧度。
-const float REAL_SHOOTPING_MOUTH_ANGLE_THRESHOLD = 0.05f;
+const float REAL_SHOOTPING_MOUTH_ANGLE_THRESHOLD = 0.15f;
 const float SIM_SHOOTPING_MOUTH_ANGLE_THRESHOLD = 0.05f;
 // 默认拿球时站在球后方的距离。
 const float REAL_SHOOTPING_GET_BALL_BACK_DIST = 13.0f;
@@ -52,31 +52,29 @@ const point2f& ball_pos = model->get_ball_pos();
 // 获取球员朝向
 const float my_dir = model->get_our_player_dir(robot_id);
 
-// 小车到球的向量
-const point2f player_to_ball = ball_pos - player_pos;
-
 // 小车到球的距离
-const float ball_dist = player_to_ball.length();
+const float ball_dist = (ball_pos - player_pos).length();
 
-// 小车指向球的方向
-const float ball_dir = player_to_ball.angle();
+// 小车指向球门中心的方向
+const point2f goal_center(static_cast<float>(FIELD_LENGTH_H), 0.0f);
+const float goal_dir = (goal_center - player_pos).angle();
 
-// 车头方向和球方向的角度差
-const float dir_error = fabs(ball_dir - my_dir);
+// 车头方向和球门方向的夹角
+const float dir_error = fabs(Maths::normalizeAngle(goal_dir - my_dir));
 
 // 距离阈值：球离小车中心多近，算在控球嘴附近
 // get_ball_threshold = 18.0f;
 
-// 角度阈值：球必须在车头前方
+// 角度阈值：车头必须对准球门
 
 
 // 判断球是否离小车足够近
 const bool ball_near = ball_dist < get_ball_threshold;
 
-// 判断球是否在小车车头方向
-const bool ball_in_front = dir_error < mouth_angle_threshold;
+// 判断车头是否朝向球门
+const bool facing_goal = dir_error < mouth_angle_threshold;
 
-return ball_near && ball_in_front;
+return ball_near && facing_goal;
 }
 
 
