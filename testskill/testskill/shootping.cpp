@@ -7,7 +7,7 @@
 
 /*
 功能流程：
-1. 本文件负责平射：先找队友/球门方向拿球，控到球后执行平射。
+1. 本文件负责平射：根据对方守门员位置选择球门空当，控到球后执行平射。
 2. 运行时通过 model->get_simulation() 判断当前是仿真还是实地。
 3. 需要调参数时只改下面的 REAL_* 或 SIM_*，player_plan 和 isget 会自动选择对应参数。
 */
@@ -30,11 +30,15 @@ const float SIM_SHOOTPING_APPROACH_BACK_DIST = 5.0f;
 // 平射力度。
 const double REAL_SHOOTPING_KICK_POWER = 30.0;
 const double SIM_SHOOTPING_KICK_POWER = 30.0;
+// 射门目标离上下门柱的安全距离，避免瞄准门柱或轻微误差导致出界。
+const float REAL_SHOOTPING_POST_MARGIN = 8.0f;
+const float SIM_SHOOTPING_POST_MARGIN = 8.0f;
 
 
 //==================== 功能块 1：判断是否控到球 ====================
-// 根据球和小车的位置、距离、方向，判断球是否已经在控球嘴附近。
-bool isget(const WorldModel* model, int robot_id)
+// 根据球和小车的位置、距离以及本帧选出的射门方向，
+// 判断机器人是否已经具备射门条件。
+bool isget(const WorldModel* model, int robot_id, float shoot_dir)
 {
 if (model == NULL) {
 return false;
@@ -55,12 +59,10 @@ const float my_dir = model->get_our_player_dir(robot_id);
 // 小车到球的距离
 const float ball_dist = (ball_pos - player_pos).length();
 
-// 小车指向球门中心的方向
-const point2f goal_center(static_cast<float>(FIELD_LENGTH_H), 0.0f);
-const float goal_dir = (goal_center - player_pos).angle();
-
-// 车头方向和球门方向的夹角
-const float dir_error = fabs(Maths::normalizeAngle(goal_dir - my_dir));
+// 车头方向和本帧射门方向的夹角。
+// 控球判断和最终射门使用同一个方向，避免机器人已经对准空当，
+// 却因为没有对准球门中心而一直无法触发踢球。
+const float dir_error = fabs(Maths::normalizeAngle(shoot_dir - my_dir));
 
 // 距离阈值：球离小车中心多近，算在控球嘴附近
 // get_ball_threshold = 18.0f;
@@ -71,7 +73,7 @@ const float dir_error = fabs(Maths::normalizeAngle(goal_dir - my_dir));
 // 判断球是否离小车足够近
 const bool ball_near = ball_dist < get_ball_threshold;
 
-// 判断车头是否朝向球门
+// 判断车头是否朝向选定的射门目标。
 const bool facing_goal = dir_error < mouth_angle_threshold;
 
 return ball_near && facing_goal;
@@ -93,85 +95,82 @@ const float get_ball_back_dist = is_sim ? SIM_SHOOTPING_GET_BALL_BACK_DIST : REA
 const float ready_back_dist = is_sim ? SIM_SHOOTPING_READY_BACK_DIST : REAL_SHOOTPING_READY_BACK_DIST;
 const float approach_back_dist = is_sim ? SIM_SHOOTPING_APPROACH_BACK_DIST : REAL_SHOOTPING_APPROACH_BACK_DIST;
 const double kick_power = is_sim ? SIM_SHOOTPING_KICK_POWER : REAL_SHOOTPING_KICK_POWER;
+const float post_margin = is_sim ? SIM_SHOOTPING_POST_MARGIN : REAL_SHOOTPING_POST_MARGIN;
 
-
-//==================== 功能块 3：寻找接球队友 ====================
-// 从我方机器人中选择一台非自己、非守门员的车作为接球队员。
-int receiver_id = -1;
-
-for (int i = 0; i < 6; i++)
-{
-// 不选自己，也不选守门员
-if (i == robot_id || i == model->get_our_goalie())
-continue;
-
-// 找到一个存在的我方球员
-if (model->get_our_exist_id()[i])
-{
-receiver_id = i;
-break;
-}
-}
-
-
-//==================== 功能块 4：没有接球队友时的处理 ====================
-// 如果没有找到接球队员，就直接返回空任务。
-// 小车不会主动执行拿球、传球或射门。
-if (receiver_id == -1)
-{
-return task;
-}
-
-
-//==================== 功能块 5：获取场上关键信息 ====================
-// 获取当前小车、球、接球队友、球门的位置。
-// 后面根据这些信息计算拿球点和踢球方向。
-
-// 获取传球队员坐标
-const point2f& player_pos = model->get_our_player_pos(robot_id);
+//==================== 功能块 3：获取场上关键信息 ====================
+// 获取当前小车和球的位置，后面据此计算拿球点和射门方向。
 
 // 获取球的位置
 const point2f& ball_pos = model->get_ball_pos();
 
-// 获取接球队员的位置
-const point2f& receiver_pos = model->get_our_player_pos(receiver_id);
-
-// 敌方球门中心
-point2f goal = -FieldPoint::Goal_Center_Point;
-
-
-//==================== 功能块 6：判断球在球门哪一侧，射向另一端 ====================
-// 根据球在场上的 Y 坐标判断球在球门上方还是下方，
-// 射向球门的相反一侧。如果球在原点附近（无球），默认射中间。
-const point2f goal_top(static_cast<float>(FIELD_LENGTH_H), static_cast<float>(GOAL_WIDTH / 2));
-const point2f goal_bottom(static_cast<float>(FIELD_LENGTH_H), static_cast<float>(-GOAL_WIDTH / 2));
-const point2f goal_center(static_cast<float>(FIELD_LENGTH_H), 0.0f);
-
+//==================== 功能块 4：根据对方守门员位置选择射门方向 ====================
+// 在上下门柱内侧保留安全边距，再比较守门员上下两侧的有效空当。
+// 最终瞄准较大空当的中心，而不是直接瞄准门柱。
+const float safe_top_y = static_cast<float>(GOAL_WIDTH / 2) - post_margin;
+const float safe_bottom_y = static_cast<float>(-GOAL_WIDTH / 2) + post_margin;
 point2f shoot_target;
-if (ball_pos.length() < 1.0f)
+int opp_goalie_id = model->get_opp_goalie();
+bool goalie_valid = (opp_goalie_id >= 0 && opp_goalie_id < 6 && model->get_opp_exist_id()[opp_goalie_id]);
+
+if (goalie_valid)
 {
-	// 没有球，默认射球门中间
-	shoot_target = goal_center;
-}
-else if (ball_pos.y > 0)
-{
-	// 球在球门上方 → 射向球门下角
-	shoot_target = goal_bottom;
+	// 将守门员 Y 坐标限制在有效门框内，防止守门员出击时产生越界目标。
+	const point2f& opp_goalie_pos = model->get_opp_player_pos(opp_goalie_id);
+	float goalie_y = opp_goalie_pos.y;
+	if (goalie_y > safe_top_y)
+	{
+		goalie_y = safe_top_y;
+	}
+	else if (goalie_y < safe_bottom_y)
+	{
+		goalie_y = safe_bottom_y;
+	}
+
+	const float upper_gap = safe_top_y - goalie_y;
+	const float lower_gap = goalie_y - safe_bottom_y;
+
+	if (upper_gap > lower_gap)
+	{
+		// 守门员上方空当更大：瞄准上方空当中心。
+		shoot_target = point2f(
+			static_cast<float>(FIELD_LENGTH_H),
+			(safe_top_y + goalie_y) * 0.5f
+		);
+	}
+	else
+	{
+		// 守门员下方空当更大：瞄准下方空当中心。
+		shoot_target = point2f(
+			static_cast<float>(FIELD_LENGTH_H),
+			(safe_bottom_y + goalie_y) * 0.5f
+		);
+	}
 }
 else
 {
-	// 球在球门下方 → 射向球门上角
-	shoot_target = goal_top;
+	// 没有可靠守门员信息时，根据球的位置选择球门另一侧的安全目标。
+	if (ball_pos.y > 0)
+	{
+		shoot_target = point2f(
+			static_cast<float>(FIELD_LENGTH_H), safe_bottom_y
+		);
+	}
+	else
+	{
+		shoot_target = point2f(
+			static_cast<float>(FIELD_LENGTH_H), safe_top_y
+		);
+	}
 }
 
 float face_dir = (shoot_target - ball_pos).angle();
 
 
-//==================== 功能块 7：设置默认拿球任务 ====================
+//==================== 功能块 5：设置默认拿球任务 ====================
 // 默认先去球后方，打开吸球，不踢球。
 // 如果还没有控到球，小车会执行这个默认拿球动作。
 
-// 默认：去球的后方，车头朝向接球队员
+// 默认：沿选定射门方向移动到球后方。
 task.orientate = face_dir;
 task.target_pos = ball_pos - Maths::vector2polar(get_ball_back_dist, face_dir);
 
@@ -183,10 +182,10 @@ task.needKick = false;
 task.isPass = false;
 
 
-//==================== 功能块 8：控到球后的踢球逻辑 ====================
+//==================== 功能块 6：控到球后的踢球逻辑 ====================
 // 如果判断球已经在控球嘴上，
 // 就保持朝向球门方向，开启击球，并设置踢球力度。
-if (isget(model, robot_id))
+if (isget(model, robot_id, face_dir))
 {
 task.target_pos = ball_pos - Maths::vector2polar(ready_back_dist, face_dir);
 
@@ -205,15 +204,15 @@ task.isChipKick = false;
 // 开启击球
 task.needKick = true;
 
-// 标记这是传球
-task.isPass = true;
+// 这是射门，不是传球。
+task.isPass = false;
 
-// 传球力度，可以根据距离调整
+// 平射力度。
 task.kickPower = kick_power;
 }
 
 
-//==================== 功能块 9：未控到球时继续拿球 ====================
+//==================== 功能块 7：未控到球时继续拿球 ====================
 // 如果球还没有进入控球嘴，
 // 小车继续移动到球后方，并保持吸球开启。
 else
@@ -233,7 +232,7 @@ task.isPass = false;
 }
 
 
-//==================== 功能块 10：返回任务 ====================
+//==================== 功能块 8：返回任务 ====================
 // 把本帧计算出的目标点、朝向、吸球、踢球等任务返回给系统执行。
 return task;
 }

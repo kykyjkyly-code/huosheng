@@ -10,7 +10,7 @@
         <ourTeam>y</ourTeam>
         <ourSide>r</ourSide>
         <isSimulation>1</isSimulation>
-        <isTest>1</isTest>
+        <isTest>0</isTest>
         <refbox_switch>0</refbox_switch>
         <camera_number>1</camera_number>
         <vehicleForward>6</vehicleForward>

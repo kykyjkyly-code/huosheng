@@ -1,8 +1,8 @@
 {
-    "IS_TEST_MODE": true,
+    "IS_TEST_MODE": false,
     "OPPONENT_NAME": "Default",
-    "gBayesPlayTable": "Package/NormalPlay/NormalPlayDefend",
-    "gNormalPlay": "NormalPlayDefend",
+    "gBayesPlayTable": "Package/NormalPlay/dlltest",
+    "gNormalPlay": "dlltest",
     "gPlayBotSkill": [
         "getball",
         "goalie",
@@ -16,11 +16,29 @@
         "refdef",
         "gotopos",
         "penaltydef",
-        "penaltykick"
+        "penaltykick",
+        "getplacex",
+        "getplacey"
     ],
     "gRefPlayTable": [
+        "Package/BackDef/Ref_BackDef",
+        "Package/BackDef/Ref_CornerKick",
+        "Package/BackKick/Ref_BackKick",
+        "Package/BackKick/Ref_BackKick_Demo1",
+        "Package/CornerDef/Ref_CornerDef",
+        "Package/CornerKick/Ref_CornerKick",
+        "Package/FrontDef/Ref_FrontDef",
+        "Package/FrontKick/Ref_FrontKick",
+        "Package/KickOff/Ref_KickOff",
+        "Package/KickOffDef/Ref_KickOffDef",
+        "Package/MiddleDef/Ref_MiddleDef",
+        "Package/MiddleKick/Ref_MiddleKick",
+        "Package/NormalPlay/dlltest",
+        "Package/PenaltyDef/Ref_PenaltyDef",
+        "Package/PenaltyKick/Ref_PenaltyKick",
         "Package/GameStop/Ref_Stop",
-        "Package/NormalPlay/NormalPlayDefend",
+        "Package/PlaceBall/Ref_PlaceBall",
+        "Package/PlaceBallDef/Ref_PlaceBallDef",
         "Package/Ref_Halt"
     ],
     "gRoleFixNum": {
@@ -35,6 +53,6 @@
         "GoalieSkill",
         "DefenderSkill"
     ],
-    "gTestPlay": "testj",
-    "gTestPlayTable": "Test/Others/testj"
+    "gTestPlay": "",
+    "gTestPlayTable": ""
 }

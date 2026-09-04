@@ -24,7 +24,7 @@ const float REAL_PGET_TARGET_POS_Y = -100.0f;
 const float SIM_PGET_TARGET_POS_X = 100.0f;
 const float SIM_PGET_TARGET_POS_Y = 130.0f;
 // 绕球半径在机器人半径基础上额外加的距离。
-const float REAL_PGET_CIRCLE_EXTRA_DIST = 5.0f;
+const float REAL_PGET_CIRCLE_EXTRA_DIST = 10.0f;
 const float SIM_PGET_CIRCLE_EXTRA_DIST = 10.0f;
 // 到达绕球圆周附近的容差。
 const float REAL_PGET_ARRIVE_CIRCLE_ERR = 1.0f;
@@ -45,6 +45,7 @@ const float SIM_PGET_RESET_FAR_EXTRA = 25.0f;
 GO_TO_BALL：先靠近球
 ORBIT_BALL：绕球调整位置，持续微调保持后方位置
 */
+//枚举值
 enum RotateBallState
 {
 	GO_TO_BALL = 0,     // 先面向球，跑到球附近

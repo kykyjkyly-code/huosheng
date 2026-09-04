@@ -39,7 +39,7 @@
         "only_for_referee": false
     },
     "referee_communication": {
-        "udp_host": "127.0.0.1",
+        "udp_host": "224.5.23.1",
         "udp_port": 10003
     },
     "report_communication": {

@@ -1,4 +1,4 @@
-#if 1
+﻿#if 1
 #include"src\utils\PlayerTask.h"
 #include"src\getballsource.h"
 #include"src\utils\worldmodel.h"
@@ -123,8 +123,46 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 	// 接球队员控球嘴位置
 	const point2f receiver_head = receiver_pos + Maths::vector2polar(static_cast<float>(ROBOT_HEAD), receiver_dir);
 
-	// 方向：球 → 接球队员控球嘴
+	// 方向：球到接球队员控球嘴
 	float face_dir = (receiver_head - ball_pos).angle();
+
+	/*==================== 绕球路径计算 ====================*/
+	/*
+	传球车不在正确球后方时，不能直接走向最终球后点，否则直线路径可能穿过球。
+	这里把球看成圆心，让机器人每帧沿圆周最多转过一小段角度，逐步绕到
+	接球队员反方向的球后位置；到达球后扇区后才允许直线贴近球。
+	*/
+	const float behind_dir = Maths::normalizeAngle(face_dir + static_cast<float>(PI));
+	const point2f ball_to_player = player_pos - ball_pos;
+	const float player_around_dir = ball_to_player.angle();
+	const float behind_angle_error = Maths::normalizeAngle(behind_dir - player_around_dir);
+
+	// 进入这个角度范围后，认为机器人已经位于正确球后侧。
+	const float BEHIND_ANGLE_TOLERANCE = 0.35f;
+	// 每帧绕球目标最多前进约 40 度，避免目标点突然跳到球的另一侧。
+	const float MAX_ORBIT_ANGLE_STEP = 0.70f;
+	const bool behind_ready = fabs(behind_angle_error) < BEHIND_ANGLE_TOLERANCE;
+
+	float orbit_angle_step = behind_angle_error;
+	if (orbit_angle_step > MAX_ORBIT_ANGLE_STEP)
+	{
+		orbit_angle_step = MAX_ORBIT_ANGLE_STEP;
+	}
+	else if (orbit_angle_step < -MAX_ORBIT_ANGLE_STEP)
+	{
+		orbit_angle_step = -MAX_ORBIT_ANGLE_STEP;
+	}
+
+	const float orbit_dir = Maths::normalizeAngle(player_around_dir + orbit_angle_step);
+	const point2f orbit_target = ball_pos
+		+ Maths::vector2polar(behind_ball_dist, orbit_dir);
+
+	// 近距离参数不能小于机器人和球的几何安全距离，否则目标点会落进球内。
+	const float min_safe_behind_dist = static_cast<float>(
+		MAX_ROBOT_SIZE + BALL_SIZE / 2 + 1.0f
+	);
+	const float final_behind_dist = behind_ball_near > min_safe_behind_dist
+		? behind_ball_near : min_safe_behind_dist;
 
 	// 默认：去球的后方，车头朝向接球队员
 	task.orientate = face_dir;
@@ -139,25 +177,37 @@ PlayerTask player_plan(const WorldModel* model, int robot_id)
 
 
 	/*==================== 控球判断与传球触发 ====================*/
-	if (isget_dynamic(model, robot_id, angle_threshold))
+	if (behind_ready && isget_dynamic(model, robot_id, angle_threshold))
 	{
 		// 控住球了，车往前顶把球送出去
 		task.target_pos = ball_pos + Maths::vector2polar(kick_nudge_dist, face_dir);
 		task.orientate = face_dir;
 
 		task.needCb = true;
-		task.isChipKick = true;
+		task.isChipKick = false;
 		task.needKick = true;
 		task.isPass = true;
 		task.kickPower = kick_power;
 	}
 	else
 	{
-		// 还没控住球，站在球后方准备
-		task.orientate = face_dir;
-		task.target_pos = ball_pos - Maths::vector2polar(behind_ball_near, face_dir);
+		if (!behind_ready)
+		{
+			// 还未到正确球后侧：沿球外圈分段绕行，车头始终朝向球。
+			task.orientate = (ball_pos - player_pos).angle();
+			task.target_pos = orbit_target;
+			// 绕行阶段关闭吸球，避免从侧面提前带走小球。
+			task.needCb = false;
+		}
+		else
+		{
+			// 已经位于球后侧：沿传球方向贴近球并打开吸球。
+			task.orientate = face_dir;
+			task.target_pos = ball_pos
+				- Maths::vector2polar(final_behind_dist, face_dir);
+			task.needCb = true;
+		}
 
-		task.needCb = true;
 		task.needKick = false;
 		task.isPass = false;
 	}

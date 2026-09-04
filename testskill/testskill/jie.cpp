@@ -15,20 +15,20 @@ extern "C" __declspec(dllexport) PlayerTask player_plan(const WorldModel* model,
 
 /*==================== 接球调参区 ====================*/
 // 固定接球点。
-const float REAL_JIE_RECEIVE_POS_X = 160.0f;
-const float REAL_JIE_RECEIVE_POS_Y = 100.0f;
-const float SIM_JIE_RECEIVE_POS_X = 100.0f;
-const float SIM_JIE_RECEIVE_POS_Y = 130.0f;
+const float REAL_JIE_RECEIVE_POS_X = 0.0f;
+const float REAL_JIE_RECEIVE_POS_Y = -50.0f;
+const float SIM_JIE_RECEIVE_POS_X = 0.0f;
+const float SIM_JIE_RECEIVE_POS_Y = -50.0f;
 
 
 // 球离开发球车超过这个距离后，认为球已经传出来。
 const float REAL_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
 const float SIM_JIE_BALL_LEAVE_DIST_EXTRA = 8.0f;
 // 接球时车头朝向的参考点：车头朝向 (orient_ref → 球) 的方向
-const float REAL_JIE_ORIENT_REF_X = 160.0f;
-const float REAL_JIE_ORIENT_REF_Y = 100.0f;
-const float SIM_JIE_ORIENT_REF_X = 100.0f;
-const float SIM_JIE_ORIENT_REF_Y = 130.0f;
+const float REAL_JIE_ORIENT_REF_X = 0.0f;
+const float REAL_JIE_ORIENT_REF_Y = -50.0f;
+const float SIM_JIE_ORIENT_REF_X = 0.0f;
+const float SIM_JIE_ORIENT_REF_Y = -50.0f;
 
 
 PlayerTask player_plan(const WorldModel* model, int robot_id)
